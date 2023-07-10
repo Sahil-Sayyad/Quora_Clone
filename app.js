@@ -2,6 +2,9 @@
 const express = require('express');
 const app = express();
 const port = 8000;
+
+//express routes handler
+app.use('/', require('./routes')); 
 //start the server
 app.listen(port, (err)=>{
     if(err){
