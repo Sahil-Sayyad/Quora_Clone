@@ -5,6 +5,10 @@ const app = express();
 const port = 8000;
 const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts');
+//used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport_local_strategy');
 
 
 //for parsing the form data into urlencoded format
@@ -20,6 +24,19 @@ app.set('layout extractScripts', true);
 //set up the view engine 
 app.set('view engine' , 'ejs');
 app.set('views', './views');
+
+//handle session cookie 
+app.use(session({
+    name:'Quora',
+    secret:"asjfsdhd",
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000*60*100)
+    }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 //express routes handler
 app.use('/', require('./routes')); 
 //start the server

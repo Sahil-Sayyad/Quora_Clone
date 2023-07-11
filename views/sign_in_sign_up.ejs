@@ -3,7 +3,7 @@
 <div class="row expanded" id="row1">
   <div class="small-12 large-12 columns" id="text">
     <h1>QUORA</h1>
-    <p id="p1">A place to share knowledge and better understand the world</p>
+    <p id="p1">The best answer to any question</p>
   </div>
 </div>
 <div class="row" id="row2">
@@ -26,20 +26,18 @@
     </p>
   </div>
   <div class="small-12 large-6 columns" id="right">
-    <form>
-      <div class="row">
-        <div class="medium-8 columns">
-          <form action="/users/create-session" method="post">
-              <label for=""><b>Email</b></label>
-              <input type="email" placeholder="Your email" name="email" />
-              <label for=""><b>Password</b></label>
-              <input type="text" placeholder="Your password" name="password" />
-              <a href="" id="#forgot">Forgot Password?</a>
-              <a href="#" class="button" id="login" id="login">Login</a>
-            </form>
-        </div>
+    <div class="row">
+      <div class="medium-8 columns">
+        <form action="/users/create-session" method="post">
+          <label for=""><b>Email</b></label>
+          <input type="email" placeholder="Your email" name="email" />
+          <label for=""><b>Password</b></label>
+          <input type="text" placeholder="Your password" name="password" />
+          <a href="" id="#forgot">Forgot Password?</a>
+          <input type="submit" value="Login" id="login" class="button" />
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -68,7 +66,7 @@
         required
       />
       <label for="">Email OTP</label>
-      <input type="number" name="otp" placeholder="Enter email OTP"  />
+      <input type="number" name="otp" placeholder="Enter email OTP" />
       <input id="Submit" class="Submit" type="submit" value="Sign Up" />
     </form>
     <br />
@@ -77,7 +75,6 @@
     </div>
   </div>
 </div>
-
 <script>
   // Get the modal
   var modal = document.getElementById("myModal");
