@@ -1,0 +1,153 @@
+div#row1 {
+  height: 100vh;
+  background-image: url(./quora\ .png);
+  background-size: cover;
+}
+div#text {
+  text-align: center;
+  height: 21%;
+}
+h1 {
+  padding-top: 4%;
+  color: #b92b27;
+  font-family: "Lobster", cursive;
+}
+p {
+  font-family: "Lora", serif;
+  font-size: 19px;
+  color: #66749f;
+}
+div#row2 {
+  height: 45%;
+  margin-top: -37%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 3%;
+  background-color: white;
+  padding-left: 1%;
+}
+a#google {
+  background-color: #df4930;
+  height: 54px;
+  padding-top: 18px;
+  width: 76%;
+  border-radius: 5px;
+}
+a#facebook {
+  height: 54px;
+  padding-top: 18px;
+  width: 76%;
+  border-radius: 5px;
+}
+p#p2 {
+  font-size: 15px;
+}
+div#right {
+  border-left: solid 1px #ececec;
+  color: grey;
+  font-size: 15px;
+  padding-left: 5%;
+}
+a#login {
+  margin-left: 107%;
+  border-radius: 5px;
+}
+i.fa.fa-google {
+  font-size: 22px;
+  padding-right: 19px;
+}
+i.fa.fa-facebook-official {
+  font-size: 20px;
+  padding-right: 12px;
+}
+a#login {
+  margin-left: 2%;
+  margin-top: 5%;
+  width: 48%;
+}
+
+label {
+  float: left;
+}
+b {
+  float: left;
+}
+#forgot {
+  position: relative;
+  top: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(35, 32, 32); /* Fallback color */
+  background-color: rgba(13, 12, 12, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #ffffff;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 20px;
+  width: 30%;
+}
+.modal-content input {
+  background-color: #f5f9f7;
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid orange;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#Submit {
+  position: relative;
+  top: 28px;
+  left: 100px;
+  padding: 1%;
+  padding-top: 0.8rem;
+  padding-right: 1.8rem;
+  padding-left: 1.8rem;
+  padding-bottom: 0.8rem;
+  background-color: #3f87eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+#sendcode {
+  position: relative;
+  top: -40px;
+  right: 100px;
+  padding: 1%;
+  padding-top: 0.9rem;
+  padding-right: 0.8rem;
+  padding-left: 0.8rem;
+  padding-bottom: 0.8rem;
+  background-color: #3f87eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
