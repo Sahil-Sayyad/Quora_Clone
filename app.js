@@ -9,8 +9,6 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport_local_strategy');
-
-
 //for parsing the form data into urlencoded format
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
@@ -24,7 +22,6 @@ app.set('layout extractScripts', true);
 //set up the view engine 
 app.set('view engine' , 'ejs');
 app.set('views', './views');
-
 //handle session cookie 
 app.use(session({
     name:'Quora',
@@ -37,6 +34,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 //express routes handler
 app.use('/', require('./routes')); 
 //start the server
