@@ -1,4 +1,5 @@
 //import all required packages
+const User = require('../models/user');
 module.exports.profile = async (req,res)=>{
 
     return res.render('users_profile', {
@@ -15,7 +16,25 @@ module.exports.signIn = async (req, res)=>{
 
 //get the sign up data 
 module.exports.create = async (req, res)=>{
+    try{
+        if(req.body.password != req.body.confirm_password){
+            return res.redirect('back');
+        }
+        console.log(req.body);
+        //check if already signed
+        const user = await User.findOne({email:req.body.email});
+        //if not then create user 
+        if(!user){
+            await User.create(req.body);
+            return res.redirect('/users/sign-in_sign-up');
+        }else{
+            return res.redirect('back');
+        }
 
+    }catch(err){
+        console.log('error in create user controller ', err);
+        return;
+    }
 
 }
 

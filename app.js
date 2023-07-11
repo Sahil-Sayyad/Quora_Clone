@@ -1,10 +1,15 @@
 //import all required packages 
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
 const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts');
 
+
+//for parsing the form data into urlencoded format
+app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 //serving the static files 
 app.use(express.static('./public'));
 //set up the layout
