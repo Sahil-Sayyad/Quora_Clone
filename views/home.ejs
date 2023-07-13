@@ -1,2 +1,17 @@
+<link rel="stylesheet" href="/stylesheets/home.css">
+<h1>Quora Home Page</h1>
 
-    <h1>Quora Home Page </h1>
+<section id="feed-question">
+     <h4>Questions</h4>
+     <form action="/question/create" id="new-question-form" method="post">
+        <textarea name="content" placeholder="type question here..." cols="30" rows="3"></textarea>
+        <input type="submit" value="ask question">
+     </form>
+
+     <div id="question-list">
+        <% for(let data of questions){ %>
+            <li><%=data.content %></li>
+            <% } %>
+     </div>
+</section>
+

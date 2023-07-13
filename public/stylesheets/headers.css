@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+
+nav {
+  font-family: "Roboto Slab", serif;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+}
+li {
+  list-style: none;
+}
+.items ul {
+  cursor: pointer;
+  padding-top: 15px;
+  position: relative;
+  left: 140px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(216, 215, 213);
+}
+
+.position {
+  cursor: pointer;
+  position: relative;
+  left: 100px;
+  color: rgb(212, 11, 11);
+  font-size: 2rem;
+  font-weight: bold;
+}
+.search-box {
+  padding-left: 5px;
+  position: relative;
+  top: -5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(145, 145, 145);
+  width: 100%;
+}
+.search-box input {
+  padding: 0.8rem;
+  padding-left: 0.1rem;
+  padding-right: 15.1rem;
+  background-color: transparent;
+  width: 80%;
+  height: 0.7rem;
+  border: 0;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  color: rgb(145, 145, 145);
+}
+
+.search-box input:focus {
+  outline: none;
+}
+.search-box i {
+  color: rgb(165, 164, 164);
+}
+.btn{
+    cursor: pointer;
+    position: relative;
+    top: -5px;
+    background-color: white;
+    border: 1px solid rgb(145, 145, 145);
+    width: 35%;
+    padding-top: 0.2rem;
+    padding-bottom: 0.5rem;
+    border-radius: 1.5rem;
+    color: rgb(216, 215, 213);
+}
+.btn2{
+    cursor: pointer;
+    position: relative;
+    top: -6px;
+    border: 0;
+    width: 50%;
+    padding-top: 0.2rem;
+    padding-bottom: 0.5rem;
+    border-radius: 1.5rem;
+    background-color: #d43030;
+    color: rgb(227, 226, 226);
+}
+
+.profile{
+    cursor: pointer;
+    position: relative;
+    top: -3px;
+    height: 30px;
+    width: 12%;
+    border-radius: 0.9rem;
+}
+.globe{
+    position: relative;
+    top: -6px;
+}
+a{
+  text-decoration: none;
+}
+
+.position a{
+  color: rgb(212, 11, 11);
+}

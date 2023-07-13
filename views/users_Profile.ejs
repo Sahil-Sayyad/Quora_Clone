@@ -1,2 +1,7 @@
-<link rel="stylesheet" href="/stylesheets/user_profile.css">
-    <h1><%= title %> / Profile Page </h1>
+<link rel="stylesheet" href="/stylesheets/user_profile.css" />
+<h1><%= title %> / Profile Page</h1>
+
+<% if(locals.user){ %>
+    <li><%=user.name%></li>
+    <li><a href="/users/sign-out">Sign Out</a></li>
+    <% }%>

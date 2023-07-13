@@ -1,8 +1,13 @@
 //import required packages 
+const Question = require('../models/question');
+const User = require('../models/user');
 module.exports.home = async (req,res)=>{
     console.log(req.cookies);
-    res.cookie('user_id', 25);
+
+    let questions = await Question.find({});
+    console.log('questions ', questions);
     return res.render('home' , {
-        title:"Quora"
+        title:"Quora",
+        questions:questions
     });
 }

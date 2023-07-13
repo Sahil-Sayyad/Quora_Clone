@@ -7,9 +7,21 @@ module.exports.profile = async (req,res)=>{
     });
 }
 
-//render sign-in and sign-up in one page 
+//render sign-in page 
 module.exports.signIn = async (req, res)=>{
-    return res.render('sign_in_sign_up' ,{
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    return res.render('sign_in' ,{
+        title:"Quora"
+    });
+}
+//render sign-up in one page 
+module.exports.signUp = async (req, res)=>{
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    return res.render('sign_up' ,{
         title:"Quora"
     });
 }
@@ -18,6 +30,7 @@ module.exports.signIn = async (req, res)=>{
 module.exports.create = async (req, res)=>{
     try{
         if(req.body.password != req.body.confirm_password){
+            console.log('password doest not match');
             return res.redirect('back');
         }
         console.log(req.body);
@@ -26,9 +39,11 @@ module.exports.create = async (req, res)=>{
         //if not then create user 
         if(!user){
             await User.create(req.body);
-            return res.redirect('/users/sign-in_sign-up');
+            console.log('user created success')
+            return res.redirect('/users/sign-in');
         }else{
-            return res.redirect('back');
+            console.log('user already exist');
+            return res.redirect('/users/sign-in');
         }
 
     }catch(err){
@@ -40,5 +55,17 @@ module.exports.create = async (req, res)=>{
 
 //sign in and create session for the user 
 module.exports.createSession = async(req, res)=>{
+    console.log("users session created succesfuly");
     return res.redirect('/');
 }
+
+//sign out and destory session of the user
+module.exports.destroySession = function(req, res){
+        req.logout((err)=>{
+            if(err){
+                return done(err);
+            }
+        });
+        console.log('user sign out succefully');
+        return res.redirect('/');
+} 
