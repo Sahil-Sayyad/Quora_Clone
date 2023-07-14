@@ -18,6 +18,7 @@ router.post(
 router.get("/sign-out", userController.destroySession);
 router.post(
   "/follow/:id",
+  passport.checkAuthentication,
   userController.followUser
 );
 router.post(

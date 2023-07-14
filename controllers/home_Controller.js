@@ -6,7 +6,7 @@ module.exports.home = async (req,res)=>{
     let questions = await Question.find({}).populate('user');
     let users = await User.find({});
     // console.log('questions ', questions);
-    console.log('users ', users);
+    // console.log('users ', users);
     return res.render('home' , {
         title:"Quora",
         questions:questions,

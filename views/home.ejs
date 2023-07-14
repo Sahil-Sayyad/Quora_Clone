@@ -2,13 +2,13 @@
 <h1>Quora Home Page</h1>
 
 <section id="feed-question">
-  <h4>Questions</h4>
+  <h4> General Questions</h4>
 
   <% if(locals.user){ %>
-  <form action="/question/create" id="new-question-form" method="post">
+  <form action="/question/create-general" id="new-question-form" method="post">
     <textarea
       name="content"
-      placeholder="type question here..."
+      placeholder="Ask a general question"
       cols="30"
       rows="3"
     ></textarea>
@@ -19,11 +19,26 @@
     <% for(let data of questions){ %>
        <% if (data.user) { %> 
     <li>
+       <li><%=data.content %></li>
        <%= data.user.name %> 
+       <% if(locals.user){%>
        <form action="/users/follow/<%=locals.user.id%>" method="post">
          <button name="currentuserid" value="<%= data.user._id %>">Follow</button>
       </form>
-      <li><%=data.content %></li>
+   <% } %>
+       <% if(locals.user){%>
+       <form action="/question/create-specific/<%=locals.user.id%>" method="post">
+         <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="ask question to the user"></textarea>
+         <button name="currentuserid" value="<%= data.user._id %>">Ask Question</button>
+      </form>
+   <% } %>
+       <% if(locals.user){%>
+       <form action="/answer/create-answer/<%=locals.user.id%>" method="post">
+         <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="Write your answer"></textarea>
+         <button name="questionId" value="<%= data._id %>">Add Answer</button>
+      </form>
+   <% } %>
+   <hr><br>
     </li>
     <% } %> <% } %>
   </div>
