@@ -1,5 +1,7 @@
 //import all required packages
 const User = require('../models/user');
+const ObjectId = require('mongodb').ObjectId;
+
 module.exports.profile = async (req,res)=>{
 
     return res.render('users_profile', {
@@ -16,7 +18,7 @@ module.exports.signIn = async (req, res)=>{
         title:"Quora"
     });
 }
-//render sign-up in one page 
+//render sign-up page 
 module.exports.signUp = async (req, res)=>{
     if(req.isAuthenticated()){
         return res.redirect('/users/profile');
@@ -69,3 +71,36 @@ module.exports.destroySession = function(req, res){
         console.log('user sign out succefully');
         return res.redirect('/');
 } 
+
+//follow a user
+module.exports.followUser = async (req, res)=>{
+    try{
+        //add the current user to the followers array of the target user
+        await User.findByIdAndUpdate(req.body.currentuserid,{followers:req.params.id});
+        //add the target user to the following array of the current user
+        await User.findByIdAndUpdate(req.params.id,{following:req.body.currentuserid});
+        console.log("User followed successfully ");
+        return res.redirect('/');
+    }catch(err){
+        console.log("error occured in followuser", err);
+        return;
+    }
+}
+
+//unfollow user 
+module.exports.unfollowUser = async (req, res)=>{
+    try{
+        const userId = req.params;
+        const currentUser = req.body;
+
+        //Remove the current user to the followers array of the target user
+        await User.findByIdAndUpdate(userId,{$pull:{followers:currentUser}});
+        //add the target user to the following array of the current user
+        await User.findByIdAndUpdate(currentUser,{$pull:{following:userId}});
+        console.log("User unfollowed successfully ");
+        return res.redirect('/');
+    }catch(err){
+        console.log("error occured in followuser", err);
+        return;
+    }
+}

@@ -15,7 +15,15 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/users/sign-up" }),
   userController.createSession
 );
-
 router.get("/sign-out", userController.destroySession);
+router.post(
+  "/follow/:id",
+  userController.followUser
+);
+router.post(
+  "/unfollow/:id",
+  passport.checkAuthentication,
+  userController.unfollowUser
+);
 
 module.exports = router;
