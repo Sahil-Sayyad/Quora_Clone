@@ -36,3 +36,27 @@ module.exports.createQuestionToUser = async (req, res)=>{
         return ;
     }
 }
+
+//add upvotes to questions db
+module.exports.upVoting = async (req, res)=>{
+    try{
+        await Question.findByIdAndUpdate(req.body.questionId, {upVoting:req.params.id});
+        console.log("upvoted to questions");
+        return res.redirect('/');
+    }catch(err){
+        console.log('error in upvoting controller', err);
+        return;
+    }
+}
+
+//add Downvotes to question db 
+module.exports.downVoting = async (req,res)=>{
+    try{    
+        await Question.findByIdAndUpdate(req.body.questionId, {downVoting:req.params.id});
+        console.log('downvoted to questions');
+        return res.redirect('/');
+    }catch(err){
+        console.log("error in downvoting controller", err);
+        return;
+    }
+}

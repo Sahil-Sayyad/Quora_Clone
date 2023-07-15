@@ -5,7 +5,7 @@ module.exports.home = async (req,res)=>{
     // console.log(req.cookies);
     let questions = await Question.find({}).populate('user');
     let users = await User.find({});
-    // console.log('questions ', questions);
+    console.log('questions ', questions);
     // console.log('users ', users);
     return res.render('home' , {
         title:"Quora",

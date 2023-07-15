@@ -7,5 +7,6 @@ const questionController = require("../controllers/question_Controller");
 
 router.post('/create-general',passport.checkAuthentication,questionController.createGeneralQuestion );
 router.post('/create-specific/:id',passport.checkAuthentication,questionController.createGeneralQuestion );
-
+router.post('/create-upvote/:id', passport.checkAuthentication,questionController.upVoting);
+router.post('/create-downvote/:id', passport.checkAuthentication,questionController.downVoting);
 module.exports = router;

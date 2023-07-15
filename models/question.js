@@ -13,7 +13,20 @@ const questionSchema = new mongoose.Schema({
     targetUser:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    upVoting:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+    downVoting:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+
 },
 {
     timestamps:true

@@ -3,7 +3,7 @@
 
 <section id="feed-question">
   <h4> General Questions</h4>
-
+ <!-- form for ask general question -->
   <% if(locals.user){ %>
   <form action="/question/create-general" id="new-question-form" method="post">
     <textarea
@@ -15,31 +15,59 @@
     <input type="submit" value="ask question" />
   </form>
   <% } %>
+
+  <!-- question data  -->
   <div id="question-list">
     <% for(let data of questions){ %>
        <% if (data.user) { %> 
     <li>
+      <!-- question content -->
        <li><%=data.content %></li>
+       <!-- who asked question  -->
        <%= data.user.name %> 
+
+       <!-- for follow to use -->
        <% if(locals.user){%>
        <form action="/users/follow/<%=locals.user.id%>" method="post">
          <button name="currentuserid" value="<%= data.user._id %>">Follow</button>
       </form>
    <% } %>
+
+      <!-- for ask question to specific user  -->
        <% if(locals.user){%>
-       <form action="/question/create-specific/<%=locals.user.id%>" method="post">
+       <form action="/questions/create-specific/<%=locals.user.id%>" method="post">
          <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="ask question to the user"></textarea>
          <button name="currentuserid" value="<%= data.user._id %>">Ask Question</button>
       </form>
    <% } %>
+
+       <!-- for anwering the question -->
        <% if(locals.user){%>
-       <form action="/answer/create-answer/<%=locals.user.id%>" method="post">
+       <form action="/answers/create-answer/<%=locals.user.id%>" method="post">
          <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="Write your answer"></textarea>
          <button name="questionId" value="<%= data._id %>">Add Answer</button>
       </form>
    <% } %>
+
+   <!-- for upvoting to the question -->
+       <% if(locals.user){%>
+       <form action="/questions/create-upvote/<%=locals.user.id%>" method="post">
+         <button name="questionId" value="<%= data._id %>">Upvote to question</button>
+      </form>
+   <% } %>
+
+   <!-- for Downvoting to the question -->
+       <% if(locals.user){%>
+       <form action="/questions/create-downvote/<%=locals.user.id%>" method="post">
+         <button name="questionId" value="<%= data._id %>">DownVote to question</button>
+      </form>
+   <% } %>
+
+
    <hr><br>
     </li>
     <% } %> <% } %>
+
+
   </div>
 </section>
