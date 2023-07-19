@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Roboto Slab", serif;
+}
 
 nav {
-  font-family: "Roboto Slab", serif;
   background-color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 li {
   list-style: none;
@@ -21,7 +28,9 @@ li {
   align-items: center;
   color: rgb(216, 215, 213);
 }
-
+.items ul img {
+  color: rgb(216, 215, 213);
+}
 .position {
   cursor: pointer;
   position: relative;
@@ -43,7 +52,7 @@ li {
 .search-box input {
   padding: 0.8rem;
   padding-left: 0.1rem;
-  padding-right: 15.1rem;
+  padding-right: 9.1rem;
   background-color: transparent;
   width: 80%;
   height: 0.7rem;
@@ -59,47 +68,169 @@ li {
 .search-box i {
   color: rgb(165, 164, 164);
 }
-.btn{
-    cursor: pointer;
-    position: relative;
-    top: -5px;
-    background-color: white;
-    border: 1px solid rgb(145, 145, 145);
-    width: 35%;
-    padding-top: 0.2rem;
-    padding-bottom: 0.5rem;
-    border-radius: 1.5rem;
-    color: rgb(216, 215, 213);
+.btn {
+  cursor: pointer;
+  position: relative;
+  top: -6px;
+  background-color: white;
+  border: 1px solid rgb(145, 145, 145);
+  width: 35%;
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
+  border-radius: 1.5rem;
 }
-.btn2{
-    cursor: pointer;
-    position: relative;
-    top: -6px;
-    border: 0;
-    width: 50%;
-    padding-top: 0.2rem;
-    padding-bottom: 0.5rem;
-    border-radius: 1.5rem;
-    background-color: #d43030;
-    color: rgb(227, 226, 226);
+.btn2 {
+  cursor: pointer;
+  position: relative;
+  top: -6px;
+  border: 0;
+  width: 50%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.5rem;
+  border-radius: 1.5rem;
+  background-color: #d43030;
+  color: white;
+}
+.btn2 {
+  background-image: linear-gradient(#d43030, #d43030);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 15px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9em;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-.profile{
-    cursor: pointer;
-    position: relative;
-    top: -3px;
-    height: 30px;
-    width: 12%;
-    border-radius: 0.9rem;
+.profile {
+  cursor: pointer;
+  position: relative;
+  top: -6px;
+  height: 30px;
+  /* width: 12%; */
+  border-radius: 0.9rem;
 }
-.globe{
-    position: relative;
-    top: -6px;
+.globe {
+  position: relative;
+  top: -6px;
 }
-a{
+
+.position a {
   text-decoration: none;
+  color: rgb(212, 11, 11);
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  background: #00d2ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #928dab,
+    #00d2ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #928dab,
+    #00d2ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.position a{
-  color: rgb(212, 11, 11);
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 45%;
+  border-radius: 7px;
+  background: #e0eafc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #cfdef3,
+    #e0eafc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #cfdef3,
+    #e0eafc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.content input{
+  text-align: start;
+  position: relative;
+  left: 50px;
+  font-size: 20px;
+  padding: 1.0rem;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid rgb(100, 99, 99);
+  background: #e0eafc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #cfdef3,
+    #e0eafc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #cfdef3,
+    #e0eafc
+  );
+
+  padding-bottom: 10px;
+}
+/* The Close Button */
+.close {
+  position: relative;
+  color: #aaaaaa;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-3 {
+  position: relative;
+  left: 4.0rem;
+  background-image: linear-gradient(#0dccea, #0d70ea);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat,sans-serif;
+  font-size: .9em;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }

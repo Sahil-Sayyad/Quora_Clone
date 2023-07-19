@@ -1,32 +1,54 @@
 <!-- Custom styles for this template -->
 <link href="/stylesheets/headers.css" rel="stylesheet" />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-/>
-
 <header>
-  <nav>
+  <nav id="navbar">
     <li class="position"><a href="/">Quora</a></li>
     <div class="items">
       <ul>
-        <li><a href="/"><span class="material-symbols-outlined"> home </span></a></li>
-        <li><span class="material-symbols-outlined"> speaker_notes </span></li>
-        <li><span class="material-symbols-outlined"> edit_square </span></li>
-        <li><span class="material-symbols-outlined"> groups </span></li>
-        <li><span class="material-symbols-outlined"> notifications </span></li>
+        <li><a href="/"><img src="/images/home.png" alt="" height="30px" /></a></li>
+        <li><img src="/images//event.png" alt="" height="30px" /></li>
+        <li><img src="/images//chat-bubble.png" alt="" height="30px" /></li>
+        <li><img src="/images//followers.png" alt="" height="30px" /></li>
+        <li><img src="/images//bell.png" alt="" height="30px" /></li>
         <div class="search-box">
           <i class="fas fa-search"></i>
           <input type="text" placeholder="Search Quora" />
         </div>
         <button class="btn">Try Quora+</button>
-            <a href="/users/profile">
-              <span class="material-symbols-outlined profile">
-              no_accounts
-            </span></a>
-        <span class="material-symbols-outlined globe"> language </span>
-        <button class="btn2">Add question</button>
+        <a href="/users/profile">
+          <img
+          class="profile"
+          src="/images//Sahil_Sayyad_Photo.jpg"
+          alt="profile"
+          />
+        </a>
+        <img class="globe" src="/images//globe.png" alt="" height="30px" />
+        <button class="btn2" id="myBtn">Add Question</button>
+        
       </ul>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="content">
+          <!-- form for ask general question -->
+          <% if(locals.user){ %>
+          <form
+            action="/questions/create-general"
+            id="new-question-form"
+            method="post"
+          >
+          <input type="text" name="content" placeholder="Ask a General Question" required><br><br>
+          <button type="submit" class="button-3">Ask Question</button>
+          </form>
+          <% } %>
+        </div>
+      </div>
     </div>
   </nav>
 </header>
+
+<script src="/javascripts/question.js"></script>

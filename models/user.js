@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isVerified: {
+      type: Boolean,
+      defaultValue: false,
+    },
     followers: [
       {
         type: mongoose.Schema.Types.ObjectId,

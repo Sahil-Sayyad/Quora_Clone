@@ -9,7 +9,20 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport_local_strategy");
+const passportGoogleoAuth2 = require('./config/passport_google_oauth_strategy');
+const passportFacebook = require('./config/passport_facebook_strategy');
 const MongoStore = require("connect-mongo");
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
+
+// Set up the chat server
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_socket').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server is listening on port 5000');
+
+
+
 //for parsing the form data into urlencoded format
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -38,7 +51,7 @@ app.use(
         autoRemove:'disabled'
     },
         function(err){
-            console.log("Error in the mongo Store");
+            console.log("Error in the mongo Store",err);
         }
     ),
   })
@@ -46,6 +59,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(customMware.setFlash)
 //express routes handler
 app.use("/", require("./routes"));
 //start the server

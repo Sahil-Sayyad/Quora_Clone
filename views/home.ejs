@@ -1,73 +1,205 @@
 <link rel="stylesheet" href="/stylesheets/home.css" />
-<h1>Quora Home Page</h1>
+<link rel="stylesheet" href="/stylesheets/chat_box.css">
+
+
+<aside>
+   <div class="Spaces">
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>History</b></a></li>
+      <li><a href="/"><img src="/images/bussiness.jpg" alt="" > <b>Business</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Psychology</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Cooking</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Music</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Science</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Health</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Movies</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Technology</b></a></li>
+      <li><a href="/"><img src="/images/history.png" alt="" > <b>Education</b></a></li>
+      <li><a href="/"><img src="/images/plus-solid.svg" alt="" > &nbsp;&nbsp;&nbsp;<b>Discover Spaces</b></a></li>
+   </div>
+</aside>
+
+<main>
+
+   
+   <div>
+      <!-- Trigger/Open The Modal -->
+      <button id="myBtn2" class="button-2">What Do You Want To Like ? Click Here </button>
+      <br><br>
+
+   </div>
+   <!-- The Modal -->
+   <div id="myModal2" class="modal2">
+      
+      <!-- Modal content -->
+      <div class="modal-content2">
+         <span class="close2">&times;</span>
+         <form action="/users/interest" method="post">
+               <div class="content2">
+                  <input type="checkbox" name="interest" value="Health and Fitness" >
+                  <label for=""> Health and Fitness</label><br><br>
+               <input type="checkbox" name="interest" value="Finance"> 
+               <label for=""> Finance</label><br><br>
+               <input type="checkbox" name="interest" value="Mobile Technology">
+               <label for=""> Mobile Technology</label><br><br>
+               <input type="checkbox" name="interest" value="Computer science">
+               <label for=""> Computer science</label><br><br>
+               <input type="checkbox" name="interest" value="Psychology">
+               <label for=""> Psychology</label><br><br>
+               <input type="checkbox" name="interest" value="Technology"> 
+               <label for=""> Technology</label><br><br>
+               <input type="checkbox" name="interest" value="Sports"> 
+               <label for=""> Sports</label><br><br>
+               <button type="submit" class="ansBtn"> Submit</button>
+              </div>
+            </form>
+      </div>
+
+   </div>
+   
 
 <section id="feed-question">
-  <h4> General Questions</h4>
- <!-- form for ask general question -->
-  <% if(locals.user){ %>
-  <form action="/question/create-general" id="new-question-form" method="post">
-    <textarea
-      name="content"
-      placeholder="Ask a general question"
-      cols="30"
-      rows="3"
-    ></textarea>
-    <input type="submit" value="ask question" />
-  </form>
-  <% } %>
+   
+   
+   <!-- question data  -->
+   <div id="question-list">
 
-  <!-- question data  -->
-  <div id="question-list">
-    <% for(let data of questions){ %>
-       <% if (data.user) { %> 
-    <li>
-      <!-- question content -->
-       <li><%=data.content %></li>
-       <!-- who asked question  -->
-       <%= data.user.name %> 
+      <% for(let question of questions){ %>
+         
+         <% if (question.user) { %> 
+            <li>
+               <div class="list1">
+                  <img src="/images/Sahil_Sayyad_Photo.jpg" alt="" >
+                  <!-- who asked question  -->
+                  <b> &nbsp;<%= question.user.name %></b>              
+                  <!-- follow to user -->
+                  <% if(locals.user){%>
+                     <a href="/users/follow/<%=question.user._id%>"> . Follow</a>
+                     <% } %> 
+                  </div>
+               <!-- question content -->
+               <li>
+                     <div class="listcontent">
+                     <%=question.content %>
+                     </div>
+               </li>
 
-       <!-- for follow to use -->
-       <% if(locals.user){%>
-       <form action="/users/follow/<%=locals.user.id%>" method="post">
-         <button name="currentuserid" value="<%= data.user._id %>">Follow</button>
-      </form>
+               <!-- question answer -->
+               
+               <%= question.targetUser%>
+               
+
+                  
+                  <!-- for ask question to specific user  -->
+                  <% if(locals.user){%>
+                     <form action="/questions/create-specific" method="post">
+                        <textarea name="content" cols="30" rows="3" placeholder="ask question to the user"></textarea>
+                        <input type="hidden" name="currentuserid" value="<%= question.user._id %>">
+                        <button type="submit" class="askQBtn">Ask Question</button>
+                     </form>
+                     <% } %>
+                     
+                     <!-- for anwering the question -->
+                     <% if(locals.user){%>
+                        <form action="/answers/create-answer" method="post">
+                           <textarea name="content" cols="30" rows="3" placeholder="Write your answer"></textarea>
+                           <input type="hidden" name="question" value="<%= question._id %>">
+                           <button type="submit" class="ansBtn">Add Answer</button>
+                        </form>
    <% } %>
 
-      <!-- for ask question to specific user  -->
+   <div id="question-anwers-list">
+      <ul id="question-anwers<%= question._id %>">
+         <% for(let answer of question.answers){ %>
+            <p>
+               Answer :<%=answer.content%>
+               <br>
+               <small>
+                  Who Answered: <%= answer.user.name%>
+               </small>
+               <br>
+               <% for(let comment of answer.comments){ %>
+                  <small>
+                     comment : <%= comment.comment%>
+                     <br>
+                  </small>
+                  <% } %>
+               </p>
+               
+               <!-- commenting to the answer  -->
+               <% if(locals.user){%>
+                  <form action="/comments/create-comment" method="post">
+                     <textarea name="comment"  cols="30" rows="3" placeholder="Write your comment"></textarea>
+                     <input type="hidden" name="questionId" value="<%= question._id %>">
+          <input type="hidden" name="answerId" value="<%= answer._id %>">
+          <button type="submit">Add Comment</button>
+        </form>
+        <% } %>
+        
+
+         <!-- for upvoting to the answer -->
        <% if(locals.user){%>
-       <form action="/questions/create-specific/<%=locals.user.id%>" method="post">
-         <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="ask question to the user"></textarea>
-         <button name="currentuserid" value="<%= data.user._id %>">Ask Question</button>
-      </form>
-   <% } %>
+         <form action="/answers/create-upvote" method="post">
+            <input type="hidden" name="currentanswerid" value="<%= answer._id %>">
+            <button type="submit">Up Vote to Answer</button>
+         </form>
+         <% } %>
+         <br>
+         <!-- for Downvoting to the answer -->
+         <% if(locals.user){%>
+            <form action="/answers/create-downvote" method="post">
+               <input type="hidden" name="currentanswerid" value="<%= answer._id %>">
+               <button type="submit">Down Vote to Answer</button>
+            </form>
+            <% } %>
+            <br><br>
+            
+            <% } %>
+         </ul>
+      </div>
+      
+      <!-- for upvoting to the question -->
+      <% if(locals.user){%>
+         <form action="/questions/create-upvote" method="post">
+            <input type="hidden" name="currentquestionid" value="<%= question._id %>">
+            <button type="submit">Up Vote to question</button>
+         </form>
+         <% } %>
+         <br>
+         <!-- for Downvoting to the question -->
+         <% if(locals.user){%>
+            <form action="/questions/create-downvote" method="post">
+               <input type="hidden" name="currentquestionid" value="<%= question._id %>">
+               <button type="submit">Down Vote to question</button>
+            </form>
+            <% } %>
+            
+            <hr><br>
+         </li>
+         <% } %> <% } %>
+      </div>
+   </section>
+   
+</main>
 
-       <!-- for anwering the question -->
-       <% if(locals.user){%>
-       <form action="/answers/create-answer/<%=locals.user.id%>" method="post">
-         <textarea name="content" id="ask-to-user" cols="30" rows="3" placeholder="Write your answer"></textarea>
-         <button name="questionId" value="<%= data._id %>">Add Answer</button>
-      </form>
-   <% } %>
-
-   <!-- for upvoting to the question -->
-       <% if(locals.user){%>
-       <form action="/questions/create-upvote/<%=locals.user.id%>" method="post">
-         <button name="questionId" value="<%= data._id %>">Upvote to question</button>
-      </form>
-   <% } %>
-
-   <!-- for Downvoting to the question -->
-       <% if(locals.user){%>
-       <form action="/questions/create-downvote/<%=locals.user.id%>" method="post">
-         <button name="questionId" value="<%= data._id %>">DownVote to question</button>
-      </form>
-   <% } %>
-
-
-   <hr><br>
-    </li>
-    <% } %> <% } %>
-
-
-  </div>
+<section class="right">
+   <div class="name">
+      <b>Spcaes To Follow</b>
+      <hr>
+   </div>
+   <div class="followSpaces">
+         <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Mobile App Programmer</b></a><br> The Best Mobile App Development Company </li>
+         <hr>
+         <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Quota Queotes</b></a><br> Daily Dosage of Unforgettable Lines From...</li>
+         <hr>
+         <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Art & Artist</b></a><br> A Space Related To Creating Practicing An ..</li>
+      </div>
 </section>
+<!-- chat box  -->
+   <!-- <%- include('chat_box') %> -->
+   
+   
+   
+   <!-- javascripts links -->
+   <script src="/javascripts/interest.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
+   <script src="/javascripts/chat_engine.js"></script>

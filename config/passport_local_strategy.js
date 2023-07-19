@@ -8,11 +8,17 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
+      passReqToCallback:true
     },
-    async function (email, password, done) {
+    async function (req, email, password, done) {
       let user = await User.findOne({ email: email });
+
+      // if(!user.confirmed){
+      //   throw new Error(' Please confirm your email to login');
+      // }
       if (!user || user.password != password) {
         console.log("Invalid Username / Password");
+        req.flash('error', 'Invalid Username / Password');
         return done(null, false);
       }
       return done(null, user);

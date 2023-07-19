@@ -1,6 +1,5 @@
 //import required packages 
 const mongoose = require('mongoose');
-
 const answerSchema = new  mongoose.Schema({
     content:{
         type:String,
@@ -28,6 +27,11 @@ const answerSchema = new  mongoose.Schema({
             ref:'User'
         }
     ],
+
+    comments:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Comment'
+    }]
 },
 {
     timestamps:true
