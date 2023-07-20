@@ -57,8 +57,8 @@ module.exports.create = async (req, res) => {
       });
 
       // Hash the password before saving into database.
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(user.password, salt);
+      // const salt = await bcrypt.genSalt(10);
+      // user.password = await bcrypt.hash(user.password, salt);
       await user.save();
 
       // Generating the token for user verification
@@ -115,6 +115,7 @@ module.exports.confirmationPost = async function (req, res, next) {
   user.isVerified = true;
   console.log(user.isVerified);
   user.save();
+  req.flash('success', 'Email Verified SuccessFully');
   console.log("user created success");
   return res.redirect("/users/sign-in");
 };

@@ -5,3 +5,16 @@
 <li><%=user.name%></li>
 <li><a href="/users/sign-out">Sign Out</a></li>
 <% }%>
+<!-- for ask question to specific user  -->
+<% if(locals.user){%>
+<form action="/questions/create-specific" method="post">
+  <textarea
+    name="content"
+    cols="30"
+    rows="3"
+    placeholder="ask question to the user"
+  ></textarea>
+  <input type="hidden" name="currentuserid" value=".." />
+  <button type="submit" class="askQBtn">Ask Question</button>
+</form>
+<% } %>
