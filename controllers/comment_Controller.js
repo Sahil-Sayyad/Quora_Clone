@@ -4,6 +4,21 @@ const Question = require('../models/question');
 const Answer = require('../models/answer');
 
 // 5. Adding Comments to Answers
+
+// render comment.ejs 
+module.exports.getPage = async(req,res)=>{
+  try{
+  let answerId = req.params.id;
+  return res.render('comment.ejs',{
+    title:"Quora | Add Comment",
+    id:answerId
+  })
+
+  }catch(err){
+    console.log(`error in getPage comment ${err}`);
+    return;
+  }
+}
 //add comment to db 
 module.exports.create = async(req, res)=>{
     try{

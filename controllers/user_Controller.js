@@ -9,17 +9,46 @@ const emailMailer = require("../mailers/emailVerification");
 //rendring profile page
 module.exports.profile = async (req, res) => {
   return res.render("users_profile", {
-    title: "Quora",
+    title: "Quora | Profile",
   });
 };
 
+//render specific user profile when the user click on the name of any user 
+
+module.exports.specificProfile = async(req,res)=>{
+  try{
+    let sUsers = await User.findById(req.params.id);
+    console.log(sUsers);
+    return res.render('specific_user_profile', {
+      title: "Quora | Profile",
+      sUser:sUsers
+    });
+
+  }catch(err){
+    console.log(`Error in specific profile controller ${err}`);
+    return;
+  }
+}
+
+//set profile picture 
+module.exports.setProfilePicture = async(req,res)=>{
+  try{
+    let user = await User.findByIdAndUpdate(req.params.id,{avatar:req.file.path});
+    req.flash('success', 'Profile Picture Has Been Sets Successfully');
+    return res.redirect('back');
+
+  }catch(err){
+    console.log(`Error in setProfilePicture controller ${err}`);
+    return;
+  }
+}
 //render sign-in page
 module.exports.signIn = async (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect("/users/profile");
   }
   return res.render("sign_in", {
-    title: "Quora",
+    title: "Quora | Sign In",
   });
 };
 
@@ -29,7 +58,7 @@ module.exports.signUp = async (req, res) => {
     return res.redirect("/users/profile");
   }
   return res.render("sign_up", {
-    title: "Quora",
+    title: "Quora | Sign Up",
   });
 };
 
@@ -41,6 +70,7 @@ module.exports.create = async (req, res) => {
     //check password and confirm password is correct
     if (req.body.password != req.body.confirm_password) {
       console.log("password doest not match");
+      req.flash("error", "Please Enter Correct Comfirm Password ");
       return res.redirect("back");
     }
 
@@ -57,8 +87,8 @@ module.exports.create = async (req, res) => {
       });
 
       // Hash the password before saving into database.
-      // const salt = await bcrypt.genSalt(10);
-      // user.password = await bcrypt.hash(user.password, salt);
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
       await user.save();
 
       // Generating the token for user verification
@@ -72,12 +102,10 @@ module.exports.create = async (req, res) => {
       // Send varification email
       const link = `http://localhost:8000/users/confirm/${token.token}`;
       await emailMailer.emailSend(users.email, "Email Verification", link);
-      console.log("this is Token : ", token);
-      return res.status(200).send({
-        message: "Email Verification link sent to your email",
-      });
+      await req.flash("success", "Email Verification link sent to your email");
+      return res.redirect("back");
     } else {
-      console.log("user already exist");
+      req.flash("success", "Email already Exists Please Login");
       return res.redirect("/users/sign-in");
     }
   } catch (err) {
@@ -93,7 +121,8 @@ module.exports.confirmationPost = async function (req, res, next) {
   // Find a matching token
   let token = await Token.findOne({ token: req.params.token });
   if (!token) {
-    console.log(
+    req.flash(
+      "error",
       "We were unable to find a valid token.Your token my have expired."
     );
     return res.redirect("/users/sign-up");
@@ -102,28 +131,27 @@ module.exports.confirmationPost = async function (req, res, next) {
   // If we found a token, find a matching user
   let user = await User.findOne({ _id: token.userId });
   if (!user) {
-    console.log('"We were unable to find a user for this token."');
+    req.flash("error", "We were unable to find a user for this token.");
     return res.redirect("/users/sign-up");
   }
   //if already verified then return
   if (user.isVerified) {
-    req.flash("success", "Email already Exist");
-    console.log("already exist");
+    req.flash("success", "Email already Exists Please Login");
     return res.redirect("/users/sign-in");
   }
   // Verify and save the user
   user.isVerified = true;
   console.log(user.isVerified);
   user.save();
-  req.flash('success', 'Email Verified SuccessFully');
-  console.log("user created success");
+  req.flash("success", "Email Verified SuccessFully Please Login");
+  //delete tokon form db after email verification success
+  await Token.deleteOne(token);
   return res.redirect("/users/sign-in");
 };
 
 //sign in and create session for the user
 module.exports.createSession = async function (req, res) {
   try {
-    console.log("users session created successfully");
     req.flash("success", "Logged in Successfully");
     return res.redirect("/");
   } catch (err) {
@@ -133,8 +161,8 @@ module.exports.createSession = async function (req, res) {
 };
 
 //sign out and destory session of the user
-module.exports.destroySession = function (req, res) {
-  req.flash("success", "Logged out Successfully");
+module.exports.destroySession = async function (req, res) {
+  await req.flash("success", "Logged out Successfully");
   req.logout((err) => {
     if (err) {
       return done(err);
@@ -153,19 +181,17 @@ module.exports.followUser = async (req, res) => {
     let istrue = false;
     //add the current user to the followers array of the target user
     let currentUser = await User.findById(req.params.id);
-    console.log("current User ", currentUser);
-    console.log("current User ", currentUser.followers[0]);
 
-    if (currentUser.followers[0] == undefined) {
-      currentUser.followers.push(req.user._id);
+    if (!currentUser.followers[0]) {
       req.flash('success','Following User Successfully');
+      currentUser.followers.push(req.user._id);
       currentUser.save();
+      let follower = await User.findById(req.user._id);
+      follower.following.push(req.params.id);
+      follower.save();
       istrue = true;
     } else {
       for (let user in currentUser.followers) {
-        console.log("User id ", currentUser.followers[user]);
-        console.log("User req id ", req.user._id);
-
         if (currentUser.followers[user].equals(req.user._id)) {
           istrue = true;
           console.log("follower already exist ");
@@ -175,8 +201,8 @@ module.exports.followUser = async (req, res) => {
     }
     //if user already not followed then add user to the followers array
     if (istrue == false) {
-      currentUser.followers.push(req.user._id);
       req.flash('success','Following User Successfully');
+      currentUser.followers.push(req.user._id);
       currentUser.save();
     }
 
@@ -187,8 +213,6 @@ module.exports.followUser = async (req, res) => {
        follower.following.push(req.params.id);
        follower.save();
     }
-
-    console.log("User followed successfully ");
     return res.redirect("/");
   } catch (err) {
     console.log("error occured in follow user", err);
@@ -206,7 +230,7 @@ module.exports.unFollowUser = async (req, res) => {
     console.log("current User ", currentUser);
     console.log("current User ", currentUser.followers[0]);
 
-    if (currentUser.followers[0] == undefined) {
+    if (!currentUser.followers[0]) {
       currentUser.followers.pop(req.user._id);
       currentUser.save();
       istrue = true;
@@ -249,7 +273,7 @@ module.exports.unFollowUser = async (req, res) => {
 // forrget password page
 module.exports.forgetPasswordPage = function (req, res) {
   return res.render("forget_password", {
-    title: "Forget Password",
+    title: "Quora | Forget Password",
   });
 };
 
@@ -257,14 +281,14 @@ module.exports.forgetPasswordLink = async function (req, res) {
   let user = await User.findOne({ email: req.body.email });
   console.log(user);
   if (!user) {
-    console.log("user not found ");
     req.flash("error", "User Not Found Please Sign Up or Try Correct Email");
     return res.redirect("/users/sign-up");
   }
 
   if (req.body.password == req.body.confirm_password) {
-    user.password = req.body.password;
-    await user.updateOne({ password: req.body.password });
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(req.body.password, salt);
+    await user.updateOne({ password: user.password });
     req.flash("success", "Password Forget Sucessfully Please Login");
     return res.redirect("/users/sign-in");
   }

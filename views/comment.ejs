@@ -1,0 +1,17 @@
+<!-- for anwering the question -->
+<link rel="stylesheet" href="/stylesheets/comment.css">
+<main>
+
+    <div class="contentCom">
+        <% if(locals.user){%>
+           <form action="/comments/create-comment" method="post">
+              <input type="text" name="comment" placeholder="Write your comment">
+              <!-- <input type="hidden" name="questionId" value="<"> -->
+              <input type="hidden" name="answerId" value="<%= id %>"><br><br>
+              <button type="submit" class="button-Comment">Add Comment</button>
+           </form>
+           <% } %>
+     </div>
+
+
+    </main>

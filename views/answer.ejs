@@ -1,0 +1,14 @@
+<!-- for anwering the question -->
+<link rel="stylesheet" href="/stylesheets/answer.css">
+<main>
+
+    <div class="contentAns">
+        <% if(locals.user){%>
+            <form action="/answers/create-answer" method="post">
+                <input type="text" name="content" placeholder="Write your answer" />
+                <input type="hidden" name="question" value="<%= id %>" /><br><br>
+                <button type="submit" class="button-answer">Submit</button>
+            </form>
+            <% } %>
+        </div>
+    </main>

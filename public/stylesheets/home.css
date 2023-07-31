@@ -12,6 +12,9 @@ a {
   text-decoration: none;
 }
 
+hr.style {
+  border-top: 3px double #8c8b8b;
+}
 /* styles for left  aside section */
 aside {
   position: fixed;
@@ -30,6 +33,9 @@ aside {
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+}
+.Spaces li:hover {
+  background-color: #e7e3e3;
 }
 .Spaces a {
   text-decoration: none;
@@ -64,9 +70,7 @@ main {
   align-items: center;
 }
 .text {
-  position: relative;
-  top: 20px;
-  right: 9.2rem;
+  display: flex;
 }
 #question-list {
   background-color: white;
@@ -74,28 +78,44 @@ main {
   border-radius: 0.3rem;
 }
 .list1 {
-  position: relative;
-  padding-top: 1rem;
-  padding-left: 10px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   gap: 5px;
+  padding-top: 1rem;
+  padding-left: 10px;
 }
 .list1 img {
+  cursor: pointer;
   height: 40px;
   border-radius: 2rem;
 }
+.list1 small {
+  position: relative;
+  top: -1.9rem;
+  padding-left: 2.5rem;
+}
 .list1 b {
+  color: black;
   font-size: 14px;
 }
+.list1 b:hover {
+  text-decoration: underline;
+}
 .list1 a {
+  position: relative;
+  top: -1.5rem;
   color: #0d70ea;
   font-size: 14px;
+}
+.list1 a:hover {
+  text-decoration: underline;
 }
 .listcontent {
   display: flex;
   justify-content: space-around;
-  padding-top: 0.7rem;
+  padding-top: 0rem;
   font-size: 18px;
   font-weight: bolder;
   width: 100%;
@@ -106,10 +126,17 @@ main {
   color: #0d70ea;
   font-size: 14px;
 }
+.listcontent a:hover {
+  text-decoration: underline;
+}
 
 /* styles for answers of questions with comment*/
 #question-anwers-list a {
   font-size: 14px;
+  color: #0d70ea;
+}
+#question-anwers-list a:hover {
+  text-decoration: underline;
 }
 #question-anwers-list {
   padding-top: 10px;
@@ -122,6 +149,11 @@ main {
 }
 .comment-text {
   padding-top: 10px;
+  /* color: #9bedfa; */
+}
+.comment-text b{
+  padding-top: 10px;
+  color: #09a0b5;
 }
 
 /* Buttons defined all */
@@ -142,6 +174,18 @@ main {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+.button-2:not([disabled]):focus {
+  box-shadow: 0 0 0.25rem rgba(158, 156, 156, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-2:not([disabled]):hover {
+  box-shadow: 0 0 0.25rem rgba(195, 189, 189, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 /* button for answer the question */
@@ -184,15 +228,6 @@ main {
   touch-action: manipulation;
 }
 
-/* button for commenting to answer */
-.commentBtn {
-  cursor: pointer;
-  border: none;
-  background-color: white;
-  color: #0d70ea;
-  font-size: 14px;
-}
-
 /* Defined all model styles here  */
 
 /* model 2 defined for taking user interest  */
@@ -208,9 +243,6 @@ main {
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  background: #30e8bf;
-  background: -webkit-linear-gradient(to left, #30e8bf, #ff8235);
-  background: linear-gradient(to left, #30e8bf, #ff8235);
 }
 
 /* Modal Content */
@@ -219,7 +251,7 @@ main {
   flex-direction: column;
   padding-top: 2rem;
   background-color: #fefefe;
-  background: linear-gradient(#fbf98b, #fbf98b);
+  background: linear-gradient(#fbfbea, #fbfbea);
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -242,107 +274,6 @@ main {
 
 .close2:hover,
 .close2::before {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* model 3 defined for taking users answers */
-.modal3 {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  background: #30e8bf;
-  background: -webkit-linear-gradient(to left, #30e8bf, #ff8235);
-  background: linear-gradient(to left, #30e8bf, #ff8235);
-}
-/* Modal Content */
-.modal-content3 {
-  display: flex;
-  flex-direction: column;
-  padding-top: 2rem;
-  background-color: #fefefe;
-  background: linear-gradient(#fbf98b, #fbf98b);
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  border-radius: 7px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.content3 {
-  position: relative;
-  left: 60px;
-}
-/* The Close Button */
-.close3 {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close3:hover,
-.close3::before {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* model 4 for adding comments to the answer */
-.modal4 {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  background: #30e8bf;
-  background: -webkit-linear-gradient(to left, #30e8bf, #ff8235);
-  background: linear-gradient(to left, #30e8bf, #ff8235);
-}
-/* Modal Content */
-.modal-content4 {
-  display: flex;
-  flex-direction: column;
-  padding-top: 2rem;
-  background-color: #fefefe;
-  background: linear-gradient(#fbf98b, #fbf98b);
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  border-radius: 7px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.content4 {
-  position: relative;
-  left: 60px;
-}
-/* The Close Button */
-.close4 {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close4:hover,
-.close4::before {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -390,6 +321,9 @@ main {
 }
 .followSpaces img {
   border-radius: 4px;
+}
+.followSpaces li:hover {
+  background-color: #e7e3e3;
 }
 .followSpaces b {
   position: relative;

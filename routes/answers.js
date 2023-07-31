@@ -5,8 +5,9 @@ const passport = require("passport");
 
 const answerController = require("../controllers/answer_Controller");
 
+router.get('/getpage/:id',answerController.getPage);
 router.post('/create-answer',passport.checkAuthentication,answerController.createAnswer );
-router.post('/create-upvote', passport.checkAuthentication,answerController.upVoting);
-router.post('/create-downvote', passport.checkAuthentication,answerController.downVoting);
+router.get('/create-upvote/:id', passport.checkAuthentication,answerController.upVoting);
+router.get('/create-downvote/:id', passport.checkAuthentication,answerController.downVoting);
 router.get('/delete', passport.checkAuthentication,answerController.delete);
 module.exports = router;

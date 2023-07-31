@@ -2,6 +2,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 //athuntication using passport
 passport.use(
@@ -12,13 +13,13 @@ passport.use(
     },
     async function (req, email, password, done) {
       let user = await User.findOne({ email: email });
-
-      // if(!user.confirmed){
-      //   throw new Error(' Please confirm your email to login');
-      // }
-      if (!user || user.password != password) {
-        console.log("Invalid Username / Password");
-        req.flash('error', 'Invalid Username / Password');
+      const isPasswordMatched = bcrypt.compareSync(password, user.password);
+      if(!user.isVerified){
+        req.flash('error', 'Please Verify Email ');
+        return done(null, false);
+      }
+      if (!user || !isPasswordMatched) {
+        req.flash('error', 'Invalid Username / Password ');
         return done(null, false);
       }
       return done(null, user);

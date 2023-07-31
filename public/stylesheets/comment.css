@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+      background-color: rgb(239, 238, 236);
+  }
+  
+  main {
+    padding-top: 5rem;
+  }
+  .contentCom {
+    padding-top: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .contentCom input {
+    text-align: center;
+    left: 50px;
+    font-size: 30px;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    padding-bottom: 10px;
+    border-radius: 0.5rem;
+  }
+  
+  .button-Comment {
+    position: relative;
+    left: 10rem;
+    background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+  }
+  
+  .button-Comment:not([disabled]):focus {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+  
+  .button-Comment:not([disabled]):hover {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+  

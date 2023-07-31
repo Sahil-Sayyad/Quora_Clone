@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const User = require("../models/user");
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-//tell passport to use new strategy for google login
+//tell passport to use new strategy for facebook login
 passport.use(
     new FacebookStrategy(
       {

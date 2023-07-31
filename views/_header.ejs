@@ -1,11 +1,14 @@
 <!-- Custom styles for this template -->
+<% if(locals.user){  %>
 <link href="/stylesheets/headers.css" rel="stylesheet" />
 <header>
   <nav>
     <li class="position"><a href="/">Quora</a></li>
     <div class="items">
       <ul>
-        <li><a href="/"><img src="/images/home.png" alt="" height="30px" /></a></li>
+        <li>
+          <a href="/"><img src="/images/home.png" alt="" height="30px" /></a>
+        </li>
         <li><img src="/images//event.png" alt="" height="30px" /></li>
         <li><img src="/images//chat-bubble.png" alt="" height="30px" /></li>
         <li><img src="/images//followers.png" alt="" height="30px" /></li>
@@ -15,16 +18,18 @@
           <input type="text" placeholder="Search Quora" />
         </div>
         <button class="btn">Try Quora+</button>
+
+        <% if(user.avatar){ %>
         <a href="/users/profile">
-          <img
-          class="profile"
-          src="/images//Sahil_Sayyad_Photo.jpg"
-          alt="profile"
-          />
+          <img class="profile" src="/<%=user.avatar%>" alt="profile" />
         </a>
+        <% }else{ %>
+        <a href="/users/profile">
+          <img class="profile" src="/images/dummyprofile.png" alt="profile" />
+        </a>
+        <% } %>
         <img class="globe" src="/images//globe.png" alt="" height="30px" />
         <button class="btn2" id="myBtn">Add Question</button>
-        
       </ul>
     </div>
 
@@ -41,8 +46,13 @@
             id="new-question-form"
             method="post"
           >
-          <input type="text" name="content" placeholder="Ask a General Question" required><br><br>
-          <button type="submit" class="button-3">Ask Question</button>
+            <input
+              type="text"
+              name="content"
+              placeholder="Ask a General Question"
+              required
+            /><br /><br />
+            <button type="submit" class="button-3">Ask Question</button>
           </form>
           <% } %>
         </div>
@@ -52,3 +62,4 @@
 </header>
 
 <script src="/javascripts/question.js"></script>
+<% } %>

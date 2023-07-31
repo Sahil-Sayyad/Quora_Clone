@@ -22,7 +22,7 @@ a{
 
 .login__container {
   position: relative;
-  top: 50px;
+  top: 7.0rem;
   display: flex;
   flex-direction: column;
   align-items: center;

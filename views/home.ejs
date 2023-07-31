@@ -1,216 +1,385 @@
 <!-- linking stylesheets  -->
 <link rel="stylesheet" href="/stylesheets/home.css" />
-<link rel="stylesheet" href="/stylesheets/chat_box.css">
-
+<link rel="stylesheet" href="/stylesheets/chat_box.css" />
 
 <!-- left aside bar for list of spaces -->
 <aside id="asidebar">
-   <div class="Spaces">
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>History</b></a></li>
-      <li><a href="/"><img src="/images/bussiness.jpg" alt=""><b>Business</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Psychology</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Cooking</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Music</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Science</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Health</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Movies</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Technology</b></a></li>
-      <li><a href="/"><img src="/images/history.png" alt=""> <b>Education</b></a></li>
-      <li><a href="/"><img src="/images/plus-solid.svg" alt=""> &nbsp;&nbsp;&nbsp;<b>Discover Spaces</b></a></li>
-   </div>
+  <div class="Spaces">
+    <li>
+      <a href="/"><img src="/images/history.png" alt="" /> <b>History</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/bussiness.jpg" alt="" /><b>Business</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/art.png" alt="" /> <b>Psychology</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/cooking.jpeg" alt="" /> <b>Cooking</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/music.jpeg" alt="" /> <b>Music</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/science.jpeg" alt="" /> <b>Science</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/health.jpeg" alt="" /> <b>Health</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/movie.jpeg" alt="" /> <b>Movies</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/tech.jpg" alt="" /> <b>Technology</b></a>
+    </li>
+    <li>
+      <a href="/"><img src="/images/edu.jpg" alt="" /> <b>Education</b></a>
+    </li>
+    <li>
+      <a href="/"
+        ><img src="/images/plus-solid.svg" alt="" /> &nbsp;&nbsp;&nbsp;<b
+          >Discover Spaces</b
+        ></a
+      >
+    </li>
+  </div>
 </aside>
 
 <!-- main container  -->
 <main>
+  <!-- this section added for question feed  -->
+  <section id="feed-question">
+    <!-- question data  -->
+    <div id="question-list">
+      <!-- main questions loop start here  -->
+      <% for(let question of questions){ %>
 
-   <!-- this section added for question feed  -->
-   <section id="feed-question">
-      <!-- question data  -->
-      <div id="question-list">
-         <!-- main questions loop start here  -->
-         <% for(let question of questions){ %>
-            <!-- if condition start here -->
-            <% if (question.user) { %>
-               <li>
-                  <div class="list1">
-                     <img src="/images/Sahil_Sayyad_Photo.jpg" alt="">
-                     <!-- who asked question  -->
-                     <b> &nbsp;<%= question.user.name %></b>
-                     <!-- follow to user -->
-                     <% if(locals.user){%>
-                        <a href="/users/follow/<%=question.user._id%>"> . Follow</a>
-                        <% } %>
-                           <small class="text">Software Engineer From Ahmednagar, India</small>
-                  </div>
-                  <!-- question content -->
-               <li>
-                  <div class="listcontent">
-                     <%=question.content %>
-                        <% if(locals.user){%>
-                           <!-- for upvoting to the question -->
-                           <a href="/questions/create-upvote/<%=question._id %>"> <img src="/images/up-arrow.png" alt=""
-                                 height="15px">Upvote .</a>
-                           <!-- for Downvoting to the question -->
-                           <a href="/questions/create-downvote/<%=question._id %>"> <img src="/images/arrow-down.png"
-                                 alt="" height="15px">Downvote .</a>
-                           <button type="submit" class="ansBtn" id="myBtn3">Add Answer</button>
-                           <% } %>
-                  </div>
-               </li>
-
-               <!-- for anwering the question -->
-               <!-- The Modal -->
-               <div id="myModal3" class="modal3">
-                  <!-- Modal content -->
-                  <div class="modal-content3">
-                     <span class="close3">&times;</span>
-                     <div class="content3">
-                        <% if(locals.user){%>
-                           <form action="/answers/create-answer" method="post">
-                              <input type="text" name="content" placeholder="Write your answer">
-                              <input type="hidden" name="question" value="<%= question._id %>">
-                              <button type="submit" class="ansBtn"> Submit</button>
-                           </form>
-                           <% } %>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- section for answer data  -->
-               <div id="question-anwers-list">
-                  <ul id="question-anwers<%= question._id %>">
-                     <!-- answers loop start here  -->
-                     <% for(let answer of question.answers){ %>
-
-                        <p>
-                           <!-- questions answer -->
-                           Answer : <%=answer.content%>
-                              <br>
-                              <small>
-                                 <!-- who Answered -->
-                                 Answered by : <b>
-                                    <%=answer.user.name%>
-                                 </b>
-                              </small>
-                              <br>
-                        </p>
-                        <!-- for upvoting to the answer -->
-                        <% if(locals.user){%>
-                           <a href="/answers/create-upvote/<%= answer._id %>"> <img src="/images/up-arrow.png" alt=""
-                                 height="15px">Upvote .</a>
-                           <!-- for Downvoting to the answer -->
-                           <a href="/answers/create-downvote/<%= answer._id %>"> <img src="/images/arrow-down.png"
-                                 alt="" height="15px">Downvote .</a>
-                           <!-- commenting to the answer  -->
-                           <button class="commentBtn" id="myBtn4" type="submit"><img src="/images/chat.png" alt=""
-                                 height="18px">Comment .</button>
-                           <% } %>
-                              <!-- list of all answers comments -->
-                              <!-- comments loop start here  -->
-                              <% for(let comment of answer.comments){ %>
-                                 <p class="comment-text">
-                                    <small>
-                                       <!-- comment data -->
-                                       Comments : <%= comment.comment%> <br>
-                                          <!-- who added comment -->
-                                          Added by: <b>
-                                             <%=comment.user.name%>
-                                          </b>
-                                          <br>
-                                    </small>
-                                 </p>
-                                 <% } %>
-                                    <!-- comments loop ends here  -->
-
-                                    <!-- model for add comment -->
-                                    <!-- The Modal -->
-                                    <div id="myModal4" class="modal4">
-                                       <!-- Modal content -->
-                                       <div class="modal-content4">
-                                          <span class="close4">&times;</span>
-                                          <div class="content4">
-                                             <% if(locals.user){%>
-                                                <form action="/comments/create-comment" method="post">
-                                                   <input type="text" name="comment" placeholder="Write your comment">
-                                                   <input type="hidden" name="questionId" value="<%= question._id %>">
-                                                   <input type="hidden" name="answerId" value="<%= answer._id %>">
-                                                   <button type="submit">Add Comment</button>
-                                                </form>
-                                                <% } %>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <br><br><br>
-                                    <% } %>
-                                       <!-- answer loop end here  -->
-                  </ul>
-               </div>
-
-               <hr><br>
-               </li>
-               <% } %>
-                  <!-- if condition of question ends here  -->
-                  <% } %>
-                     <!-- main question loop ends here  -->
+      <!-- if condition start here -->
+      <% if (question.user && question.targetUser) { %>
+      <!-- this condition for the if target User present then show question data  -->
+      <div class="list1">
+        <li>
+          <% if(question.user.avatar){ %>
+          <img src="/<%=question.user.avatar%>" alt="" height="30px" />
+          <% }else{ %>
+          <img src="/images/dummyprofile.png" alt="" height="30px" />
+          <% } %>
+          <!-- who asked question  -->
+          <a href="/users/profile/<%=question.user._id%>"
+            ><b>
+              &nbsp;<%= question.user.name %> Asked To
+              <%=question.targetUser.name%></b
+            ></a
+          >
+          <!-- follow to user -->
+          <% if(locals.user){%>
+          <a
+            href="/users/follow/<%=question.user._id%>"
+            class="followBtn"
+            id="<%= question.user.name %>"
+          >
+            Follow</a
+          >
+          <% } %>
+        </li>
+        <li>
+          <small>Short Bio eg. Head of Customer Success at Hostinger.com</small>
+        </li>
       </div>
-   </section>
-   <!-- question feed section ends here  -->
+      <!-- question content -->
+      <li>
+        <div class="listcontent">
+          <%=question.content %> <% if(locals.user){%>
+          <!-- for upvoting to the question -->
+          <a href="/questions/create-upvote/<%=question._id %>">
+            <img
+              src="/images/up-arrow.png"
+              alt=""
+              height="15px"
+            /><%=question.upVoting.length%> . Upvote
+          </a>
+          <!-- for Downvoting to the question -->
+          <a href="/questions/create-downvote/<%=question._id %>">
+            <img
+              src="/images/arrow-down.png"
+              alt=""
+              height="15px"
+            /><%=question.downVoting.length%> . Downvote
+          </a>
+          <a href="/answers/getpage/<%=question._id %>">Add Answer</a>
+          <% } %>
+        </div>
+      </li>
+
+      <!-- section for answer data  -->
+      <div id="question-anwers-list">
+        <ul id="question-anwers<%= question._id %>">
+          <!-- answers loop start here  -->
+          <% for(let answer of question.answers){ %>
+
+          <p>
+            <!-- questions answer -->
+            Answer : <%=answer.content%>
+            <br />
+            <small>
+              <!-- who Answered -->
+              Answered by : <b> <%=answer.user.name%> </b>
+            </small>
+            <br />
+          </p>
+          <!-- for upvoting to the answer -->
+          <% if(locals.user){%>
+          <a href="/answers/create-upvote/<%= answer._id %>">
+            <img
+              src="/images/up-arrow.png"
+              alt=""
+              height="15px"
+            /><%=answer.upVoting.length%> .Upvote
+          </a>
+          <!-- for Downvoting to the answer -->
+          <a href="/answers/create-downvote/<%= answer._id %>">
+            <img
+              src="/images/arrow-down.png"
+              alt=""
+              height="15px"
+            /><%=answer.downVoting.length%> .Downvote
+          </a>
+          <!-- commenting to the answer  -->
+          <a href="/comments/getpage/<%=answer._id%>">
+            <img src="/images/chat.png" alt="" height="18px" />
+
+            Comment .</a
+          >
+          <% } %>
+          <!-- list of all answers comments -->
+          <!-- comments loop start here  -->
+          <% for(let comment of answer.comments){ %>
+          <p class="comment-text">
+            <small>
+              <!-- comment data -->
+              <b> Comments :</b> <%= comment.comment%> <br />
+              <!-- who added comment -->
+              <% if (comment.user) { %> Commented by:
+              <b> <%= comment.user.name %> </b> <% } else { %> Added by:
+              <b> Unknown User </b>
+              <% } %>
+              <br />
+            </small>
+          </p>
+          <% } %>
+          <!-- comments loop ends here  -->
+          <br /><br /><br />
+          <% } %>
+          <!-- answer loop end here  -->
+        </ul>
+      </div>
+
+      <hr class="style" />
+      <br />
+      <% } else if(question.user){%>
+      <!-- this else if for the genral question asked by user  -->
+      <div class="list1">
+        <li>
+          <% if(question.user.avatar){ %>
+          <img src="/<%=question.user.avatar%>" alt="" height="30px" />
+          <% }else{ %>
+          <img src="/images/dummyprofile.png" alt="" height="30px" />
+          <% } %>
+          <!-- who asked question  -->
+          <a href="/users/profile/<%=question.user._id%>"
+            ><b> &nbsp;<%= question.user.name %></b></a
+          >
+          <!-- follow to user -->
+          <% if(locals.user){%>
+          <a
+            href="/users/follow/<%=question.user._id%>"
+            class="followBtn"
+            id="<%= question.user.name %>"
+          >
+            Follow</a
+          >
+          <% } %>
+        </li>
+        <li>
+          <small>Short Bio eg. Head of Customer Success at Hostinger.com</small>
+        </li>
+      </div>
+      <!-- question content -->
+      <li>
+        <div class="listcontent">
+          <%=question.content %> <% if(locals.user){%>
+
+          <!-- for upvoting to the question -->
+          <a href="/questions/create-upvote/<%=question._id %>">
+            <img src="/images/up-arrow.png" alt="" height="15px" />
+            <%=question.upVoting.length%> . Upvote
+          </a>
+          <!-- for Downvoting to the question -->
+          <a href="/questions/create-downvote/<%=question._id %>">
+            <img
+              src="/images/arrow-down.png"
+              alt=""
+              height="15px"
+            /><%=question.downVoting.length%> . Downvote
+          </a>
+          <a href="/answers/getpage/<%=question._id %>">Add Answer</a>
+          <% } %>
+        </div>
+      </li>
+
+      <!-- section for answer data  -->
+      <div id="question-anwers-list">
+        <ul id="question-anwers<%= question._id %>">
+          <!-- answers loop start here  -->
+          <% for(let answer of question.answers){ %>
+
+          <p>
+            <!-- questions answer -->
+            Answer : <%=answer.content%>
+            <br />
+            <small>
+              <!-- who Answered -->
+              Answered by : <b> <%=answer.user.name%> </b>
+            </small>
+            <br />
+          </p>
+          <!-- for upvoting to the answer -->
+          <% if(locals.user){%>
+          <a href="/answers/create-upvote/<%= answer._id %>">
+            <img
+              src="/images/up-arrow.png"
+              alt=""
+              height="15px"
+            /><%=answer.upVoting.length%>. Upvote
+          </a>
+          <!-- for Downvoting to the answer -->
+          <a href="/answers/create-downvote/<%= answer._id %>">
+            <img
+              src="/images/arrow-down.png"
+              alt=""
+              height="15px"
+            /><%=answer.downVoting.length%>. Downvote
+          </a>
+          <!-- commenting to the answer  -->
+          <a href="/comments/getpage/<%=answer._id%>">
+            <img src="/images/chat.png" alt="" height="18px" />
+
+            Comment .</a
+          >
+          <% } %>
+          <!-- list of all answers comments -->
+          <!-- comments loop start here  -->
+          <% for(let comment of answer.comments){ %>
+          <p class="comment-text">
+            <small>
+              <!-- comment data -->
+              <b>Comments :</b> <%= comment.comment%> <br />
+              <!-- who added comment -->
+              <% if (comment.user) { %> Commented by:
+              <b> <%= comment.user.name %> </b> <% } else { %> Added by:
+              <b> Unknown User </b>
+              <% } %>
+              <br />
+            </small>
+          </p>
+          <% } %>
+          <!-- comments loop ends here  -->
+          <br /><br /><br />
+          <% } %>
+          <!-- answer loop end here  -->
+        </ul>
+      </div>
+
+      <hr class="style" />
+      <br />
+      <% } %>%>
+      <!-- if condition of question ends here  -->
+      <% } %>
+      <!-- main question loop ends here  -->
+    </div>
+  </section>
+  <!-- question feed section ends here  -->
 </main>
 <!-- main container ends here -->
 
 <!-- right aside bar for list of spaces to follow -->
 <section class="right">
-   <div class="name">
-      <b>Spcaes To Follow</b>
-      <hr>
-   </div>
-   <div class="followSpaces">
-      <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Mobile App Programmer</b></a><br> The Best
-         Mobile App Development Company </li>
-      <hr>
-      <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Quota Queotes</b></a><br> Daily Dosage of
-         Unforgettable Lines From...</li>
-      <hr>
-      <li><a href=""><img src="/images/history.png" alt="" height="25px"><b> Art & Artist</b></a><br> A Space Related To
-         Creating Practicing An ..</li>
-   </div>
+  <div class="name">
+    <b>Spcaes To Follow</b>
+    <hr />
+  </div>
+  <div class="followSpaces">
+    <li>
+      <a href=""
+        ><img src="/images/bussiness.jpg" alt="" height="25px" /><b>
+          Mobile App Programmer</b
+        ></a
+      ><br />
+      The Best Mobile App Development Company
+    </li>
+    <hr />
+    <li>
+      <a href=""
+        ><img src="/images/art.png" alt="" height="25px" /><b>
+          Quota Queotes</b
+        ></a
+      ><br />
+      Daily Dosage of Unforgettable Lines From...
+    </li>
+    <hr />
+    <li>
+      <a href=""
+        ><img src="/images/history.png" alt="" height="25px" /><b>
+          Art & Artist</b
+        ></a
+      ><br />
+      A Space Related To Creating Practicing An ..
+    </li>
+  </div>
 
-   <button id="myBtn2" class="button-2">What Do You Want To Like ? Click Here </button>
+  <button id="myBtn2" class="button-2">
+    What Do You Want To Like ? Click Here
+  </button>
+  <!-- chat box  -->
+  <%- include('chat_box') %>
 </section>
 
 <!-- The Modal -->
 <div id="myModal2" class="modal2">
-
-   <!-- Modal content -->
-   <div class="modal-content2">
-      <span class="close2">&times;</span>
-      <form action="/users/interest" method="post">
-         <div class="content2">
-            <input type="checkbox" name="interest" value="Health and Fitness">
-            <label for=""> Health and Fitness</label><br><br>
-            <input type="checkbox" name="interest" value="Finance">
-            <label for=""> Finance</label><br><br>
-            <input type="checkbox" name="interest" value="Mobile Technology">
-            <label for=""> Mobile Technology</label><br><br>
-            <input type="checkbox" name="interest" value="Computer science">
-            <label for=""> Computer science</label><br><br>
-            <input type="checkbox" name="interest" value="Psychology">
-            <label for=""> Psychology</label><br><br>
-            <input type="checkbox" name="interest" value="Technology">
-            <label for=""> Technology</label><br><br>
-            <input type="checkbox" name="interest" value="Sports">
-            <label for=""> Sports</label><br><br>
-            <button type="submit" class="ansBtn"> Submit</button>
-         </div>
-      </form>
-   </div>
+  <!-- Modal content -->
+  <div class="modal-content2">
+    <span class="close2">&times;</span>
+    <form action="/users/interest" method="post">
+      <div class="content2">
+        <input type="checkbox" name="interest" value="Health and Fitness" />
+        <label for=""> Health and Fitness</label><br /><br />
+        <input type="checkbox" name="interest" value="Finance" />
+        <label for=""> Finance</label><br /><br />
+        <input type="checkbox" name="interest" value="Mobile Technology" />
+        <label for=""> Mobile Technology</label><br /><br />
+        <input type="checkbox" name="interest" value="Computer science" />
+        <label for=""> Computer science</label><br /><br />
+        <input type="checkbox" name="interest" value="Psychology" />
+        <label for=""> Psychology</label><br /><br />
+        <input type="checkbox" name="interest" value="Technology" />
+        <label for=""> Technology</label><br /><br />
+        <input type="checkbox" name="interest" value="Sports" />
+        <label for=""> Sports</label><br /><br />
+        <button type="submit" class="ansBtn">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>
-<!-- chat box  -->
-<!-- <%- include('chat_box') %> -->
+
 
 <!-- javascripts links -->
-<script src="/javascripts/comment.js"></script>
-<script src="/javascripts/answer.js"></script>
-<script src="/javascripts/interest.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
 <script src="/javascripts/chat_engine.js"></script>
+<script src="/javascripts/home.js"></script>
+<script src="/javascripts/interest.js"></script>
+<% if(locals.user){ %>
+<script>
+  new ChatEngine("user-chat-box", "<%= locals.user.email%>");
+</script>
+
+<% } %>

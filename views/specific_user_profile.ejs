@@ -4,37 +4,33 @@
 <main>
   <!-- display all user information  -->
   <div class="container">
-    <% if(locals.user){ %>
+    
     <div class="profile-list1">
       <!-- user profile -->
-      <% if(user.avatar){ %>
-        <li><img src="/<%=user.avatar%>" alt=""/></li>
-        <% }else{ %>
-        <li><img src="/images/dummyprofile.png" alt=""/></li>
-          <% } %>
+      <% if(sUser.avatar){ %>
+      <li><img src="/<%=sUser.avatar%>" alt=""/></li>
+      <% }else{ %>
+      <li><img src="/images/dummyprofile.png" alt=""/></li>
+        <% } %>
       <div class="info">
         <!-- user name -->
-        <li><b><%=user.name%></b></li>
+        <li><b><%=sUser.name%></b></li>
         <!-- users short one line about  -->
         <li>Short Bio eg. Head of Customer Success at Hostinger.com</li>
         <!-- users followers count and following count  -->
-        <li class="text-follow"><%=user.followers.length%> Followers&nbsp; .&nbsp; <%=user.following.length%> Following</li>
+        <li class="text-follow"><%=sUser.followers.length%> Followers&nbsp; .&nbsp; <%=sUser.following.length%> Following</li>
+        
+        <!-- follow button and  ask question to user button -->
+        <li><a href="/users/follow/<%=sUser._id%>">Follow</a> <button type="submit" id="myBtn5" class="askQBtnU">Ask ?</button></li>
         
       </div>
       <!-- users description -->
-    </div>
-    <div class="profile-picture">
-      <form action="/users/avatar/<%=user.id%>" method="post" enctype="multipart/form-data">
-        <input type="file" name="avatar" placeholder="upload profile picture" required>
-        <button type="submit" class="button-upload ">Upload Profile Picture</button>
-      </form>
-    </div>
+     </div>
     <li>
       <p class="text">
         <h4>About me</h4><br>
-
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus porro minus soluta, tempora dolores quisquam, odit, sapiente eius ad vitae quis. Ullam maxime laudantium soluta reprehenderit quasi aut, nesciunt perferendis.
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque, accusamus adipisci quidem quae fugiat distinctio quis enim voluptate, eum, dolores quaerat! Temporibus ea vel esse excepturi, facilis at architecto magnam.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus porro minus soluta, tempora dolores quisquam, odit, sapiente eius ad vitae quis. Ullam maxime laudantium soluta reprehenderit quasi aut, nesciunt perferendis.
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque, accusamus adipisci quidem quae fugiat distinctio quis enim voluptate, eum, dolores quaerat! Temporibus ea vel esse excepturi, facilis at architecto magnam.
       </p>
     </li>
 
@@ -45,8 +41,8 @@
       <li>0 Answers</li>
       <li>0 Question</li>
       <li>0 Posts</li>
-      <li><%=user.followers.length%> Followers</li>
-      <li><%=user.following.length%>  Following</li>
+      <li><%=sUser.followers.length%> Followers</li>
+      <li><%=sUser.following.length%>  Following</li>
       <li>Edits</li>
       <li>Activity</li>
     </div>
@@ -59,28 +55,25 @@
       <!-- Modal content -->
       <div class="modal-content5">
         <span class="close5">&times;</span>
-        <form action="/users/interest" method="post">
           <div class="content5">
             <% if(locals.user){%>
-              <form action="/questions/create-specific" method="post">
+              <form action="/questions/create-specific/<%=sUser._id%>" method="post">
                 <input
                   type="text"
                   name="content"
                   placeholder="ask question to the user"
                 />
-                <input type="hidden" name="currentuserid" value=".." />
-                <button type="submit" class="askQBtn">Ask Question</button>
+                <button type="submit" class="button-5 ">Ask Question</button>
               </form>
               <% } %>
           </div>
-        </form>
       </div>
     </div>
   </div>
 </main>
 <div class="singout">
 <button class="button-signout" role="button"><a href="/users/sign-out">Sign Out</a></button>
-  <% }%>
+
 </div>
 
 <!-- linking javascripts  -->

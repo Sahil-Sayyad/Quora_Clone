@@ -30,11 +30,11 @@ module.exports.createQuestionToUser = async (req, res) => {
     await Question.create({
       content: req.body.content,
       user: req.user._id,
-      targetUser: req.body.currentuserid,
+      targetUser: req.params.id,
     });
     req.flash('success',`Question Asked to User Successfully`);
     console.log("question user specific created succesfully");
-    return res.redirect("/");
+    return res.redirect("back");
   } catch (err) {
     console.log("Error in question create controller ", err);
     return;
@@ -49,7 +49,7 @@ module.exports.upVoting = async (req, res) => {
     //check if user already follow to user
     let istrue = false;
     //add the current user to the followers array of the target user
-    let currentQuestion = await Question.findById(req.body.currentquestionid);
+    let currentQuestion = await Question.findById(req.params.id);
 
     for (let user in currentQuestion.downVoting) {
       //if the upVoting arrays user and req user is equal then break the loop
@@ -71,6 +71,7 @@ module.exports.upVoting = async (req, res) => {
       for (let question in currentQuestion.upVoting) {
         //if the upVoting arrays user and req user is equal then break the loop
         if (currentQuestion.upVoting[question].equals(req.user._id)) {
+          req.flash('success', 'Already Up Voted ');
           istrue = true;
           currentQuestion.save();
           console.log("upVoter already exist ");
@@ -80,6 +81,7 @@ module.exports.upVoting = async (req, res) => {
     }
     //if user already not upVoted then add user to the upVoting array
     if (istrue == false) {
+      req.flash('success', 'Up Voted Successfully');
       currentQuestion.upVoting.push(req.user._id);
       currentQuestion.save();
     }
@@ -97,19 +99,20 @@ module.exports.downVoting = async (req, res) => {
     //check if user already down Voted to user
     let istrue = false;
     //add the current user to the down Voting array of the target user
-    let currentQuestion = await Question.findById(req.body.currentquestionid);
+    let currentQuestion = await Question.findById(req.params.id);
     //check in upvoting array user upvoted there
     for (let user in currentQuestion.upVoting) {
       //if the upVoting arrays user and req user is equal then pull the user form upvoting array break the loop
       if (currentQuestion.upVoting[user].equals(req.user._id)) {
-        currentQuestion.upVoting.pop(req.user._id);
         console.log("upVoter deleted successfully");
+        currentQuestion.upVoting.pop(req.user._id);
         break;
       }
     }
 
     //if the Downvoting array is empty the check and push user id.
     if (currentQuestion.downVoting[0] == undefined) {
+      req.flash('success', 'Down Voted Successfully');
       currentQuestion.downVoting.push(req.user._id);
       currentQuestion.save();
       istrue = true;
@@ -118,6 +121,7 @@ module.exports.downVoting = async (req, res) => {
       for (let user in currentQuestion.downVoting) {
         //if the upVoting arrays user and req user is equal then break the loop
         if (currentQuestion.downVoting[user].equals(req.user._id)) {
+          req.flash('success', 'Already Down Voted');
           istrue = true;
           currentQuestion.save();
           console.log("DownVoter already exist ");
@@ -127,6 +131,7 @@ module.exports.downVoting = async (req, res) => {
     }
     //if user  already not downVoted then add user to the downVoting array
     if (istrue == false) {
+      req.flash('success', 'Down Voted Successfully');
       currentQuestion.downVoting.push(req.user._id);
       currentQuestion.save();
     }

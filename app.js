@@ -15,13 +15,11 @@ const MongoStore = require("connect-mongo");
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
-// Set up the chat server
+// Setup the chat server to be used with socket.io
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_socket').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('chat server is listening on port 5000');
-
-
 
 //for parsing the form data into urlencoded format
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +34,8 @@ app.set("layout extractScripts", true);
 //set up the view engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 //handle session cookie
 app.use(
   session({
