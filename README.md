@@ -78,7 +78,6 @@
 -  <b> <i> Specific User Profile Page </i></b> <br><br>
  ![Quora_Clone_UserSpec_Profile](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/dc0ad4d8-b4ec-4ec5-9f96-9c91e4f68b88)
 
-
 -  <b> <i> Ask Question Page  </i></b> <br><br>
 ![quoraAsk](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/dd7aa4d8-a6bb-48d4-b862-3e3f9a37392e)
 
