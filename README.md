@@ -92,6 +92,6 @@
 
 
 - Name: Sahil Sayyad
-- GitHub: <a><b>[https://github.com/Sahil-Sayyad](https://github.com/Sahil-Sayyad/Placement_Cell)</a></b>
+- GitHub: <a><b>https://github.com/Sahil-Sayyad/Quora_Clone</a></b>
 - Email: 
 - Website: 
