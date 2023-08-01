@@ -80,8 +80,7 @@
 
 
 -  <b> <i> Ask Question Page  </i></b> <br><br>
-![Quora_Question_Ask_Model](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/74defe56-2848-48af-8d9f-c3d48bbb51ce)
-
+![quoraAsk](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/dd7aa4d8-a6bb-48d4-b862-3e3f9a37392e)
 
 -  <b> <i> Add Answer Page   </i></b> <br><br>
 ![Quora_CLone_AddAnswer](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/6b572367-7d82-4f09-811b-eafbc5abe937)
