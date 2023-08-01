@@ -32,8 +32,8 @@
 -  <b> 2.  &nbsp;Install NPM dependencies </b>
    <br>----<i> npm install</i> <br><br>
 -  <b> 2.  &nbsp;Set Up .env file  </b>
-   <br>----<i> add mongodb your url</i> <br><br>
-   <br>----<i> add google and facebook clientid , clientsceret, callbackurl your url</i> <br><br>
+   <br>----<i> add mongodb your url</i>
+   <br>----<i> add google and facebook clientid , clientsceret, callbackurl your url</i> 
    <br>----<i> add username and password setting up nodemailer</i> <br><br>
 -  <b> 3. &nbsp; Then simply start your app </b>
    <br>----<i>npm start </i><br><br>
