@@ -1,5 +1,5 @@
 const nodeMailer = require("../config/nodemailer");
-
+//sending email to user for email verification 
 exports.emailSend = async (email, subject, link) => {
   try {
     let htmlString = nodeMailer.renderTemplate({ link: link }, "/email.ejs");

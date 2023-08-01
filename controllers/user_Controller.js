@@ -13,35 +13,35 @@ module.exports.profile = async (req, res) => {
   });
 };
 
-//render specific user profile when the user click on the name of any user 
-
-module.exports.specificProfile = async(req,res)=>{
-  try{
+//render specific user profile page when the user click on the name of any user
+module.exports.specificProfile = async (req, res) => {
+  try {
     let sUsers = await User.findById(req.params.id);
-    console.log(sUsers);
-    return res.render('specific_user_profile', {
+    return res.render("specific_user_profile", {
       title: "Quora | Profile",
-      sUser:sUsers
+      sUser: sUsers,
     });
-
-  }catch(err){
+  } catch (err) {
     console.log(`Error in specific profile controller ${err}`);
     return;
   }
-}
+};
 
-//set profile picture 
-module.exports.setProfilePicture = async(req,res)=>{
-  try{
-    let user = await User.findByIdAndUpdate(req.params.id,{avatar:req.file.path});
-    req.flash('success', 'Profile Picture Has Been Sets Successfully');
-    return res.redirect('back');
+//set profile picture
+module.exports.setProfilePicture = async (req, res) => {
+  try {
 
-  }catch(err){
+    let user = await User.findByIdAndUpdate(req.params.id, {
+      avatar: req.file.path,
+    });
+    req.flash("success", "Profile Picture Has Been Sets Successfully");
+    return res.redirect("back");
+  } catch (err) {
     console.log(`Error in setProfilePicture controller ${err}`);
     return;
   }
-}
+};
+
 //render sign-in page
 module.exports.signIn = async (req, res) => {
   if (req.isAuthenticated()) {
@@ -69,7 +69,6 @@ module.exports.create = async (req, res) => {
   try {
     //check password and confirm password is correct
     if (req.body.password != req.body.confirm_password) {
-      console.log("password doest not match");
       req.flash("error", "Please Enter Correct Comfirm Password ");
       return res.redirect("back");
     }
@@ -100,7 +99,7 @@ module.exports.create = async (req, res) => {
       await token.save();
 
       // Send varification email
-      const link = `http://localhost:8000/users/confirm/${token.token}`;
+      const link = `${process.env.EMAIL_URL}/users/confirm/${token.token}`;
       await emailMailer.emailSend(users.email, "Email Verification", link);
       await req.flash("success", "Email Verification link sent to your email");
       return res.redirect("back");
@@ -109,7 +108,7 @@ module.exports.create = async (req, res) => {
       return res.redirect("/users/sign-in");
     }
   } catch (err) {
-    console.log("error in create user controller ", err);
+    console.log(`error in create user controller ${err}`);
     return;
   }
 };
@@ -125,14 +124,14 @@ module.exports.confirmationPost = async function (req, res, next) {
       "error",
       "We were unable to find a valid token.Your token my have expired."
     );
-    return res.redirect("/users/sign-up");
+    return res.redirect("back");
   }
 
   // If we found a token, find a matching user
   let user = await User.findOne({ _id: token.userId });
   if (!user) {
     req.flash("error", "We were unable to find a user for this token.");
-    return res.redirect("/users/sign-up");
+    return res.redirect("back");
   }
   //if already verified then return
   if (user.isVerified) {
@@ -141,7 +140,6 @@ module.exports.confirmationPost = async function (req, res, next) {
   }
   // Verify and save the user
   user.isVerified = true;
-  console.log(user.isVerified);
   user.save();
   req.flash("success", "Email Verified SuccessFully Please Login");
   //delete tokon form db after email verification success
@@ -168,7 +166,6 @@ module.exports.destroySession = async function (req, res) {
       return done(err);
     }
   });
-  console.log("user sign out successfully");
   return res.redirect("/");
 };
 
@@ -183,7 +180,7 @@ module.exports.followUser = async (req, res) => {
     let currentUser = await User.findById(req.params.id);
 
     if (!currentUser.followers[0]) {
-      req.flash('success','Following User Successfully');
+      req.flash("success", "Followed Successfully");
       currentUser.followers.push(req.user._id);
       currentUser.save();
       let follower = await User.findById(req.user._id);
@@ -194,14 +191,13 @@ module.exports.followUser = async (req, res) => {
       for (let user in currentUser.followers) {
         if (currentUser.followers[user].equals(req.user._id)) {
           istrue = true;
-          console.log("follower already exist ");
           break;
         }
       }
     }
     //if user already not followed then add user to the followers array
     if (istrue == false) {
-      req.flash('success','Following User Successfully');
+      req.flash("success", "Following User Successfully");
       currentUser.followers.push(req.user._id);
       currentUser.save();
     }
@@ -210,12 +206,12 @@ module.exports.followUser = async (req, res) => {
     let follower = await User.findById(req.user._id);
 
     if (istrue == false) {
-       follower.following.push(req.params.id);
-       follower.save();
+      follower.following.push(req.params.id);
+      follower.save();
     }
-    return res.redirect("/");
+    return res.redirect("back");
   } catch (err) {
-    console.log("error occured in follow user", err);
+    console.log(`error occured in follow user ${err}`);
     return;
   }
 };
@@ -226,9 +222,7 @@ module.exports.unFollowUser = async (req, res) => {
     //check if user already follow to user
     let istrue = false;
     //remove the current user to the followers array of the target user
-    let currentUser = await User.findById(req.body.currentuserid);
-    console.log("current User ", currentUser);
-    console.log("current User ", currentUser.followers[0]);
+    let currentUser = await User.findById(req.params.id);
 
     if (!currentUser.followers[0]) {
       currentUser.followers.pop(req.user._id);
@@ -236,12 +230,8 @@ module.exports.unFollowUser = async (req, res) => {
       istrue = true;
     } else {
       for (let user in currentUser.followers) {
-        console.log("User id ", currentUser.followers[user]);
-        console.log("User req id ", req.user._id);
-
         if (currentUser.followers[user].equals(req.user._id)) {
           istrue = true;
-          console.log("unfollower already exist ");
           break;
         }
       }
@@ -259,11 +249,9 @@ module.exports.unFollowUser = async (req, res) => {
       follower.following.pop(req.body.currentuserid);
       follower.save();
     }
-
-    console.log("User unfollowed successfully ");
     return res.redirect("/");
   } catch (err) {
-    console.log("error occured in unfollow user", err);
+    console.log(`error occured in unfollow user ${err}`);
     return;
   }
 };
@@ -279,7 +267,6 @@ module.exports.forgetPasswordPage = function (req, res) {
 
 module.exports.forgetPasswordLink = async function (req, res) {
   let user = await User.findOne({ email: req.body.email });
-  console.log(user);
   if (!user) {
     req.flash("error", "User Not Found Please Sign Up or Try Correct Email");
     return res.redirect("/users/sign-up");
@@ -302,25 +289,22 @@ module.exports.userInterest = async (req, res) => {
       interest: req.body.interest,
       user: req.user._id,
     });
-    console.log("interest collected ");
-    return res.redirect("/");
+    return res.redirect("back");
   } catch (err) {
-    console.log("error in userInterest controller ", err);
+    console.log(`error in userInterest controller ${err}`);
     return;
   }
 };
 
-//delete answer form the db
-module.exports.delete = async(req, res)=>{
-  try{
+//delete user form the db
+module.exports.delete = async (req, res) => {
+  try {
     let id = req.params.id;
-    //to do later
-    // await Answer.findByIdAndDelete(id);
-    await User.deleteMany({});
-    req.flash('success', 'all user  deleted successfully');
-    return res.redirect('/');
-  }catch(err){
+    await User.findByIdAndDelete(id);
+    req.flash("success", "Account deleted successfully");
+    return res.redirect("/");
+  } catch (err) {
     console.log(`error in user delete controller ${err}`);
     return;
   }
-}
+};

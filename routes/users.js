@@ -2,9 +2,9 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-//setting up multer for img 
+const userController = require("../controllers/user_Controller");
+//setting up multer for uploading an profile picture
 const multer  = require('multer')
-
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
         return cb(null, './uploads');
@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: storage })
-const userController = require("../controllers/user_Controller");
 
 router.get("/profile", passport.checkAuthentication, userController.profile);
 router.get('/profile/:id', userController.specificProfile);
@@ -25,7 +24,7 @@ router.get("/confirm/:token", userController.confirmationPost);
 router.post("/create", userController.create);
 router.post(
   "/create-session",
-  passport.authenticate("local", { failureRedirect: "back" }),
+  passport.authenticate("local", { failureRedirect: "back", failureFlash:" Dont' have an account? Sign Up" }),
   userController.createSession
 );
 router.get("/sign-out", userController.destroySession);
@@ -48,7 +47,7 @@ router.get(
 
 router.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/users/sign-in" }),
+  passport.authenticate("google", { failureRedirect: "/users/sign-in" , failureFlash:'Error Login With Google'}),
   userController.createSession
 );
 
@@ -60,7 +59,7 @@ router.get(
 
 router.get(
   "/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/users/sign-in" }),
+  passport.authenticate("facebook", { failureRedirect: "/users/sign-in" , failureFlash:'Error Login With Facebook' }),
   userController.createSession
 );
 
@@ -74,5 +73,6 @@ router.post(
   passport.checkAuthentication,
   userController.userInterest
 );
-router.get("/delete", userController.delete);
+//deleteing user 
+router.get("/delete/:id", userController.delete);
 module.exports = router;

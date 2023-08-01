@@ -13,14 +13,17 @@ passport.use(
     },
     async function (req, email, password, done) {
       let user = await User.findOne({ email: email });
-      const isPasswordMatched = bcrypt.compareSync(password, user.password);
-      if(!user.isVerified){
-        req.flash('error', 'Please Verify Email ');
-        return done(null, false);
-      }
-      if (!user || !isPasswordMatched) {
-        req.flash('error', 'Invalid Username / Password ');
-        return done(null, false);
+      if(user){
+
+        const isPasswordMatched = bcrypt.compareSync(password, user.password);
+        if(!user.isVerified){
+          req.flash('error', 'Please Verify Email ');
+          return done(null, false);
+        }
+        if (!user || !isPasswordMatched) {
+          req.flash('error', 'Invalid Username / Password ');
+          return done(null, false);
+        }
       }
       return done(null, user);
     }

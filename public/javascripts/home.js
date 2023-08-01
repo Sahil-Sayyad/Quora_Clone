@@ -1,3 +1,5 @@
+// this script for the when the user click on follow button then 'follow ' 
+// text replace by 'following ' name 
 document.addEventListener("DOMContentLoaded", function () {
   // Get all elements with the "followBtn" class
   const followButtons = document.querySelectorAll(".followBtn");

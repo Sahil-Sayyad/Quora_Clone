@@ -1,6 +1,5 @@
 <!-- linking stylesheets  -->
 <link rel="stylesheet" href="/stylesheets/home.css" />
-<link rel="stylesheet" href="/stylesheets/chat_box.css" />
 
 <!-- left aside bar for list of spaces -->
 <aside id="asidebar">
@@ -59,11 +58,13 @@
       <!-- this condition for the if target User present then show question data  -->
       <div class="list1">
         <li>
+          <!-- if user has profile then show users profile else show dummy profile -->
           <% if(question.user.avatar){ %>
           <img src="/<%=question.user.avatar%>" alt="" height="30px" />
           <% }else{ %>
           <img src="/images/dummyprofile.png" alt="" height="30px" />
           <% } %>
+
           <!-- who asked question  -->
           <a href="/users/profile/<%=question.user._id%>"
             ><b>
@@ -81,9 +82,10 @@
             Follow</a
           >
           <% } %>
+
         </li>
         <li>
-          <small>Short Bio eg. Head of Customer Success at Hostinger.com</small>
+          <small> Short Bio eg. Head of Customer Success at Hostinger.com</small>
         </li>
       </div>
       <!-- question content -->
@@ -180,11 +182,13 @@
       <!-- this else if for the genral question asked by user  -->
       <div class="list1">
         <li>
+          <!-- if user has profile then show users profile else show dummy profile -->
           <% if(question.user.avatar){ %>
           <img src="/<%=question.user.avatar%>" alt="" height="30px" />
           <% }else{ %>
           <img src="/images/dummyprofile.png" alt="" height="30px" />
           <% } %>
+
           <!-- who asked question  -->
           <a href="/users/profile/<%=question.user._id%>"
             ><b> &nbsp;<%= question.user.name %></b></a
@@ -336,12 +340,9 @@
       A Space Related To Creating Practicing An ..
     </li>
   </div>
-
   <button id="myBtn2" class="button-2">
     What Do You Want To Like ? Click Here
   </button>
-  <!-- chat box  -->
-  <%- include('chat_box') %>
 </section>
 
 <!-- The Modal -->
@@ -373,13 +374,8 @@
 
 
 <!-- javascripts links -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
-<script src="/javascripts/chat_engine.js"></script>
 <script src="/javascripts/home.js"></script>
+<!-- this javascript file for the showing model  -->
 <script src="/javascripts/interest.js"></script>
-<% if(locals.user){ %>
-<script>
-  new ChatEngine("user-chat-box", "<%= locals.user.email%>");
-</script>
 
-<% } %>
+

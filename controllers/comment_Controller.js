@@ -37,23 +37,19 @@ module.exports.create = async(req, res)=>{
             answer.comments.push(comment);
             answer.save();
         }
-        console.log("comment data : ", req.body);
         req.flash('success', 'Commented to Answer');
-        console.log("comment created sussefully");
         return res.redirect('/');
     }catch(err){
-        console.log("error in comment create controller", err);
+        console.log(`error in comment create controller ${err}`);
         return;
     }
 }
 
-//delete answer form the db
+//delete comment form the db
 module.exports.delete = async(req, res)=>{
     try{
       let id = req.params.id;
-      //to do later
-      // await Answer.findByIdAndDelete(id);
-      await Comment.deleteMany({});
+      await Comment.findByIdAndDelete(id);
       req.flash('success', 'comment deleted successfully');
       return res.redirect('/');
     }catch(err){
