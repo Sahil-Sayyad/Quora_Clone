@@ -23,9 +23,9 @@
 -  <b> 6. Saving User's Interests </b>
    <p>The application allowed users to save their interests or topics they are interested in. This feature facilitated personalized content delivery to users.</p>
 -  <b> 7. User's Feed </b>
--  <p>Users received a personalized feed according to their interests, displaying questions, answers, and discussions related to the topics they followed.</p>
+   <p>Users received a personalized feed according to their interests, displaying questions, answers, and discussions related to the topics they followed.</p>
 -  <b> 8. Social Login + Local Login </b>
--  <p>The application supported both social login and local login methods. For local login, users were required to verify their account via email. Additionally, a password reset option was available for local login users.</p>
+   <p>The application supported both social login and local login methods. For local login, users were required to verify their account via email. Additionally, a password reset option was available for local login users.</p>
 ## Getting Started
 -  <b> 1. &nbsp; Clone Git Repo  </b>
     <br>----<i> git clone https://github.com/Sahil-Sayyad/Quora_Clone.git</i><br><br>
