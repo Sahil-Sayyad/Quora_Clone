@@ -1,6 +1,6 @@
-# Quora Clone App
+# Q&A Nexus App
   
- <b> I developed a web application called "Quora Clone." The primary goal of this project was to create a platform that mimics some of the key features of the popular Q&A platform Quora. <b> 
+ <b> I developed a web application called "Q&A Nexus." The primary goal of this project was to create a platform that mimics some of the key features of the popular Q&A platform Quora. <b> 
 
 ## Table of Contents
 -  <b> [Features](#features)</b>
