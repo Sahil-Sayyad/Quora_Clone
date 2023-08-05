@@ -60,38 +60,39 @@
 
 ## Project Demo
  - <b> <i> Login Page  </i></b> <br><br>
-   ![Quora_Sign_in](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/bed139bf-cd2c-4892-a1ef-44d9b5e8a754)
+![Web capture_5-8-2023_112647_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/aefbc24a-545a-4c57-b774-0e1e2fd0124f)
 
 -  <b> <i> Sign Up  Page  </i></b> <br><br>
-![Quora_Sign_up](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/0448ed16-1d7d-4641-af86-aeeebd94d499)
-
+![Web capture_5-8-2023_112757_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/62aabc34-da73-4927-95fd-377adf41c147)
 
 -  <b> <i> Forget Password Page  </i></b> <br><br>
-![Quora_Forgot_Pass](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/63aa5899-314c-49b0-855e-64a9818e48c7)
+
+![Web capture_5-8-2023_112839_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/26c0b6eb-1fb5-4fd5-9a65-81aacb800d9f)
 
 -  <b> <i> Home Page  </i></b> <br><br>
-![Quora_Clone_home](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/6289bde3-cad7-4c0c-bd0d-629193ad672b)
+![Web capture_5-8-2023_112929_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/03449dc4-1b40-45c8-900e-77c17e64710b)
 
 -  <b> <i>User Profile Page  </i></b> <br><br>
-![Quora_Clone_Usersprofile](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/465c02ae-9b75-49b3-b0c2-914fb1eb2274)
+![Web capture_5-8-2023_11302_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/9d0344a8-a6e1-488d-8ad1-c82fc244f5cf)
 
 -  <b> <i> Specific User Profile Page </i></b> <br><br>
- ![Quora_Clone_UserSpec_Profile](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/dc0ad4d8-b4ec-4ec5-9f96-9c91e4f68b88)
+![Web capture_5-8-2023_113052_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/c7bab0b9-feb7-4504-87f4-afb0c36ad72e)
+
 
 -  <b> <i> Ask Question Page  </i></b> <br><br>
 ![quoraAsk](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/dd7aa4d8-a6bb-48d4-b862-3e3f9a37392e)
 
 -  <b> <i> Add Answer Page   </i></b> <br><br>
-![Quora_CLone_AddAnswer](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/6b572367-7d82-4f09-811b-eafbc5abe937)
+![Web capture_5-8-2023_113135_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/6c735544-19e9-4901-94b9-9e43fa293f56)
 
 -  <b> <i> Add Comment Page  </i></b> <br><br>
+![Web capture_5-8-2023_11333_localhost](https://github.com/Sahil-Sayyad/Q-A_Nexus/assets/96423459/4018c667-9465-4cda-bc3d-3841d947042d)
 
-![Quora_Clone_Add_Comment](https://github.com/Sahil-Sayyad/Quora_Clone/assets/96423459/0b196145-3877-40be-b5b6-984306b8665d)
 
 ## Author
 
 
 - Name: Sahil Sayyad
-- GitHub: <a><b>https://github.com/Sahil-Sayyad/Quora_Clone</a></b>
+- GitHub:  <a href = "https://github.com/Sahil-Sayyad/Q-A_Nexus"> <b>Link</b> </a>
 - Email: 
 - Website: 
