@@ -8,7 +8,7 @@ const emailMailer = require("../mailers/emailVerification");
 
 //rendring profile page
 module.exports.profile = async (req, res) => {
-  return res.render("users_profile", {
+  return res.render("users_Profile", {
     title: "Quora | Profile",
   });
 };
